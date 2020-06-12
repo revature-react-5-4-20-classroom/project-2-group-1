@@ -10,7 +10,8 @@ import { MovieFormPage } from "./pages/MovieFormPage";
 import { MoviePage } from "./pages/MoviePage";
 import { MoviesListFormPage } from "./pages/MoviesListFormPage";
 import { MoviesListPage } from "./pages/MoviesListPage";
-
+import {NavBar} from "./components/NavBar"
+import { Nav } from "reactstrap";
 
 //! For Redux
 const mapStateToProps = (state: IState) => {
@@ -35,7 +36,7 @@ export class App extends React.Component<any, any> {
       <div>
         <Provider store={store}>
           <Router>
-            {/* NAV COMPONENT SHOULD GO HERE */}
+            <NavBar/>
 
             <Switch>
               <Route path="/login" render={(props) => 
