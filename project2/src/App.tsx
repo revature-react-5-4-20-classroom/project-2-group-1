@@ -1,3 +1,91 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Provider, connect } from "react-redux";
+import { store } from "./redux/store";
+import { IState } from "./redux/reducers";
+import { GenericPage } from "./pages/GenericPage";
+import { LandingPage } from "./pages/LandingPage";
+import { LoginPage } from "./pages/LoginPage";
+import { MovieFormPage } from "./pages/MovieFormPage";
+import { MoviePage } from "./pages/MoviePage";
+import { MoviesListFormPage } from "./pages/MoviesListFormPage";
+import { MoviesListPage } from "./pages/MoviesListPage";
 
-export default class App extends React.Component<any, any>{}
+
+//! For Redux
+const mapStateToProps = (state: IState) => {
+  return {
+    ...state.ttt,
+    //add player state as well
+    ...state.player
+  }
+}
+const mapDispatchToProps = {
+  // listClickActionMapper,
+  // userClickActionMapper
+}
+// Connect is a higher order component. This creates a container that has access to the global state
+// We can create other containers depending on the page we are one
+const GenericReduxContainer = connect(mapStateToProps, mapDispatchToProps)(GenericPage);
+//! End of Redux
+
+export class App extends React.Component<any, any> {
+  render() {
+    return (
+      <div>
+        <Provider store={store}>
+          <Router>
+            {/* NAV COMPONENT SHOULD GO HERE */}
+
+            <Switch>
+              <Route path="/login" render={(props) => 
+                <LoginPage
+                  {...props}
+                />}
+              />
+
+              <Route path="/movie-form" render={(props) => 
+                <MovieFormPage
+                  {...props}
+                />}
+              />
+              {/* We will use id number from our db */}
+              <Route path="/movie/id" render={(props) => 
+                <MoviePage
+                  {...props}
+                />}
+              />
+
+              <Route path="/movies-form" render={(props) => 
+                <MoviesListFormPage
+                  {...props}
+                />}
+              />
+              {/* We will use list id from our db */}
+              <Route path="/movies/list" render={(props) => 
+                <MoviesListPage
+                  {...props}
+                />}
+              />
+
+              {/* This is how we will use the store */}
+              <Route path="/generic" render={(props) => 
+                <GenericReduxContainer 
+                  {...props}
+                />}
+              />
+              {/* Everything is thrown here */}
+              <Route path="/" render={(props) => 
+                <LandingPage
+                  {...props}
+                />}
+              />
+            </Switch>
+
+
+          </Router>
+        </Provider>
+      </div>
+    )
+  }
+}
