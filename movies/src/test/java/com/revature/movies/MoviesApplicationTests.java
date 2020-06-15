@@ -1,10 +1,10 @@
-package com.spring.demo;
+package com.revature.movies;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Group1project2ApplicationTests {
+class MoviesApplicationTests {
 
 	@Test
 	void contextLoads() {
