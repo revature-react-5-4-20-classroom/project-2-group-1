@@ -3,19 +3,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.web.bind.annotation.GetMapping; 
 import org.springframework.web.bind.annotation.RestController;
-import com.revature.movies.models.Actor;
-import com.revature.movies.services.ActorServices; 
+import com.revature.movies.models.Director;
+import com.revature.movies.services.DirectorServices; 
  
  
 @RestController 
-public class ActorController { 
+public class DirectorController { 
    
   @Autowired 
-  ActorServices actorServices; 
+  DirectorServices directorServices; 
    
-  @GetMapping("/actors") 
-  public List<Actor> getAllActors()  { 
-     return actorServices.getAll(); 
+  @GetMapping("/directors") 
+  public List<Director> GetAllActors()  { 
+     return directorServices.getAll(); 
 } 
 } 
- 
