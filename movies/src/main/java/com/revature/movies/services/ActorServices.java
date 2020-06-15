@@ -35,26 +35,30 @@ public class ActorServices implements ActorServicesInterface {
 
   @Override
   public Actor create(Actor actor) {
-    // Implement later
+    // Testing notations
+    System.out.println(actor.toString());
     return null;
 //    actor.setActorId(0);
   }
 
   @Override
   public Actor update(Actor actor) {
-    // TODO Auto-generated method stub
+    // Testing notations
+    System.out.println(actor.toString());
     return null;
   }
 
   @Override
   public Actor createOrUpdate(Actor actor) {
-    // TODO Auto-generated method stub
+    // Testing notations
+    System.out.println(actor.toString());
     return null;
   }
 
   @Override
   public void delete(Integer id) {
-    // TODO Auto-generated method stub
+    // Testing notations
+    System.out.println(id);
     
   }
   
