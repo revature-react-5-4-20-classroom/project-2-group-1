@@ -20,9 +20,9 @@ import { toggle } from "./components/toggleComponent";
 //! For Redux
 const mapStateToProps = (state: IState) => {
   return {
-    ...state.ttt,
+    ...state.movies,
     //add player state as well
-    ...state.player
+    // ...state.player
   }
 }
 const mapDispatchToProps = {

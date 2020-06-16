@@ -1,6 +1,7 @@
 
 export class Movie
 {
+    [k: string]: any;
     movieId: number
     imdbId: string
     title: string
@@ -45,6 +46,6 @@ export class Movie
         this.metascore = metascore,
         this.trailer = trailer,
         this.genres = genres,
-        this.actors = actors 
+        this.actors = actors
     }
 }
