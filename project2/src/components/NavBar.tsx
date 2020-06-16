@@ -5,12 +5,14 @@ import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { User } from '../models/Users';
 
+
 interface INavBarProps
 {
-    loggedInUser: User | null
+    loggedInUser: User | null,
+    toggleTheme: ()=> void
 }
 
-export class NavBar extends React.Component<any, any>
+export class NavBar extends React.Component<INavBarProps, any>
 {
     render(){
         return(
@@ -23,7 +25,8 @@ export class NavBar extends React.Component<any, any>
                     <NavItem>
                         <NavLink to="/login" className="nav-link" activeClassName="active">Login</NavLink>
                     </NavItem>
-                    <NavItem tag={()=>{return <Button to="/home"  hidden={!this.props.loggedInUser} onClick={this.props.logoutUser} color="secondary" outline>Logout</Button>}} />
+                    <NavItem tag={()=>{return <Button to="/home"  hidden={!this.props.loggedInUser} /*onClick={this.props.logoutUser}*/ color="secondary" outline>Logout</Button>}} />
+                    <button onClick={()=>this.props.toggleTheme()}>Toggle Theme</button>
                 </Nav>
                 <Form inline className="mr-sm-2">
                     <FormGroup >
