@@ -5,19 +5,20 @@
 import { AnyAction, combineReducers } from "redux"
 import { moviesTypes } from "./action-mappers"
 import { calculateWinner } from './util'
-// import { Movie } from "../models/Movie"
+import { Movie } from "../models/Movie"
 
 // Our tictactoe state follows the state from our Game Component
 export interface IMoviesState {
-  movies: string; //Movie[];
+  movies: any[]; //Movie[];
   focusMovie: number;
 }
+
 
 // Set up an initial state
 const initialMovieState : IMoviesState = {
   // We are going to store movies in an array. This is a single movie you should be able to build around this.
-  movies: "movie"
-  // movies: [new Movie(1, 'tt0068646', 'The Godfather', 'R', '24 Mar 1972', '175 min', 'Fill in', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg', 9.2, 100, 'https://www.youtube.com/embed/sY1S34973zA', ['Crime', 'Drama'], ['Marlon Brando', 'Al Pacino', 'James Caan', 'Richard S. Castellano'])],
+  // movies: "movie",
+  movies: [{movieId: 1, imdbId: 'tt0068646', title: 'The Godfather', rated: 'R', released: '24 Mar 1972', runtime: '175 min', director: 'Fill in', plot: 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', poster: 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg', imdbRating: 9.2, metascore: 100, trailer: 'https://www.youtube.com/embed/sY1S34973zA', genres: ['Crime', 'Drama'], actors: ['Marlon Brando', 'Al Pacino', 'James Caan', 'Richard S. Castellano']}],
   focusMovie: 1,
 }
 
