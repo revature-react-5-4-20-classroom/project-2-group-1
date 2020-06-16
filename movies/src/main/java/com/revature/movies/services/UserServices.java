@@ -19,6 +19,4 @@ public class UserServices implements UserServicesInterface {
    return userRepository.findAllSorted();
   }
   
-  
-  
 }

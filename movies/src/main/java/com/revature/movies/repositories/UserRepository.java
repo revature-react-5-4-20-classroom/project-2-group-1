@@ -12,4 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository  <User, Integer> {
   @Query("select u from User u order by u.username")
  List<User> findAllSorted();
+  
+ 
+  
 }

@@ -17,7 +17,9 @@ public class UserListController {
   public List<UserList> getAllUserLists( )  { 
  //   const id = +req.params.id; 
      return userListServices.getAll(); 
+     
 } 
    
+  
    
 } 
