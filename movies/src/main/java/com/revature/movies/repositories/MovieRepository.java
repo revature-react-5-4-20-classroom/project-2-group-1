@@ -2,17 +2,15 @@ package com.revature.movies.repositories;
 
 
 
-import com.revature.movies.models.User;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.revature.movies.models.Movie;
+
 @Repository
-public interface UserRepository extends JpaRepository  <User, Integer> {
-  @Query("select u from User u order by u.username")
- List<User> findAllSorted();
-  
- 
-  
+public interface MovieRepository extends JpaRepository  <Movie, Integer> {
+  @Query("select m from Movie m order by m.title")
+ List<Movie> findAllSorted();
 }
