@@ -13,10 +13,10 @@ public class User {
   @Id
   @Column(name="userid")
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private int userId;
+ private int userId;
   @Column(name="username")
   private String username;
-  @Column(name="pword")
+  @Column(name="password")
   private String password;
   @Column(name="email")
   private String email;
@@ -30,18 +30,13 @@ public class User {
   
   
   
-  public User(int userId, String username, String password, String email) {
+  public User(String username, String password, String email) {
     super();
-    this.userId = userId;
+    
     this.username = username;
     this.password = password;
     this.email = email;
     }
-
-
-
-
-
 
 
   public int getUserId() {
@@ -53,40 +48,18 @@ public class User {
     return username;
   }
 
-
-
-
-
-
-
   public void setUsername(String username) {
     this.username = username;
   }
-
-
-
-
-
 
 
   public String getPassword() {
     return password;
   }
 
-
-
-
-
-
-
   public void setPassword(String password) {
     this.password = password;
   }
-
-
-
-
-
 
 
   public String getEmail() {
@@ -94,24 +67,12 @@ public class User {
   }
 
 
-
-
-
-
-
   public void setEmail(String email) {
     this.email = email;
   }
 
 
-
-
-
-
-
-  
-
-  @Override
+ @Override
   public String toString() {
     return "User [userId=" + userId + ", username=" + username + ", password=" + password
         + ", email=" + email + "]";

@@ -16,12 +16,12 @@ public class Actor {
   @Id
   @Column(name="actorid")
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private int actorId;
+ private int actorId;
 //  @ManyToMany
 //  @JoinTable(name = "actorsjoin", joinColumns= @JoinColumn(name = "movieid"),
 //      inverseJoinColumns = @JoinColumn(name = "actorid"))
   @Column(name="actorname")
-  private String actorName;
+ private String actorName;
   
   public Actor() {
     super();

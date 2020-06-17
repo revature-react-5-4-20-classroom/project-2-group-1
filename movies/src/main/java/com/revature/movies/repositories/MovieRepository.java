@@ -12,11 +12,17 @@ import org.springframework.stereotype.Repository;
 import com.revature.movies.models.Movie;
 
 @Repository
-public interface MovieRepository extends JpaRepository  <Movie, Integer> {
+public interface MovieRepository extends JpaRepository  <Movie, Integer>, CustomMovieRepositoryInterface {
   @Query("select m from Movie m order by m.title")
  List<Movie> findAllSorted();
 
+  @Query("select m from Movie m where m.title=title")
+  Optional<Movie> findByTitle (String title);
+  
+  @Query("select m from Movie m where m.movieId=movieid")
+  Optional<Movie> findById (Integer movieid);
 
-@Query("select m from Movie m where m.movieId=movieid")
- Optional<Movie> FindById (Integer movieid);
+@Query("select m from Movie m where m.imdbId = imdbNumber")
+List<Movie> findAll(String imdbNumber);
+
 }
