@@ -1,11 +1,26 @@
+import { Movie } from "../models/Movie"
+
 //Specifying the action types that are possible in our movies application
 export const moviesTypes = {
+  // MOVIE_GET_CLICK: 'MOVIE_GET_CLICK',
   MOVIES_GET_CLICK: 'MOVIES_GET_LIST',
-  MOVIES_CURRENT_FOCUS: 'MOVIES_CURRENT_FOCUS'
+  UPDATE_MOVIES: 'UPDATE_MOVIES'
 }
 
-// We want to make a query to a database when we receive this action
+//TODO: Do we want movie focus?
+// // For changing movie id in the global state
+// export const movieClickActionMapper = (movieId: number) => {
+//   return {
+//     type: moviesTypes.MOVIE_GET_CLICK,
+//     payload: {
+//       movieId
+//     }
+//   }
+// }
+
+// For changing user list id in the global state
 export const moviesClickActionMapper = (userListId: number) => {
+  console.log("YO")
   return {
     type: moviesTypes.MOVIES_GET_CLICK,
     payload: {
@@ -14,14 +29,16 @@ export const moviesClickActionMapper = (userListId: number) => {
   }
 }
 
-export const movieClickActionMapper = (movieId: number) => {
+export const moviesUpdateActionMapper = (movies: Movie[]) => {
   return {
-    type: moviesTypes.MOVIES_CURRENT_FOCUS,
+    type: moviesTypes.UPDATE_MOVIES,
     payload: {
-      movieId
+      movies
     }
   }
 }
+
+//
 
 //! Later =============================================================
 // // We'll need to hook up that state and reducer to the store (IState interface and combineReducers)
