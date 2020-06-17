@@ -86,21 +86,21 @@ export class App extends React.Component<any, any> {
                     {...props}
                   />}
                 />
-                {/* We will use id number from our db */}
-                <Route path="/movie/id" render={(props) => 
-                  <MoviePage
+                 {/* We will use list id from our db */}
+                 <Route path="/movies/list" render={(props) => 
+                  <MoviesListPage
+                    {...props}
+                  />}
+                />
+                {/* We will use title from our db */}
+                <Route path="/movie/:title" render={(props) => 
+                  <MoviePage 
                     {...props}
                   />}
                 />
 
                 <Route path="/movies-form" render={(props) => 
                   <MoviesListFormPage
-                    {...props}
-                  />}
-                />
-                {/* We will use list id from our db */}
-                <Route path="/movies/list" render={(props) => 
-                  <MoviesListPage
                     {...props}
                   />}
                 />
