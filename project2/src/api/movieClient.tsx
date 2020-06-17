@@ -28,3 +28,9 @@ export async function  getMovieBy(title: string): Promise<Movie[]>
     })
     
 }
+
+// // Get the userList by userListId
+// export async function getUserListBy(userListId: number): Promise<Movie[]>
+// {
+//     const response = await movieClient.get(`/movies/list/`)
+// }
