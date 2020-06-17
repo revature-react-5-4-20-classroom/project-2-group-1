@@ -1,9 +1,30 @@
 import * as React from 'react';
 import { Movie } from '../models/Movie';
 import { getAllMovies } from '../api/movieClient';
-import { moviesClickActionMapper } from '../redux/action-mappers';
 import { MoviePreview } from '../components/moviePreview';
 import { Table, Container } from 'reactstrap';
+import { ExampleActorsBackend } from '../components/ExampleActorsBackend';
+import { IState } from '../redux/reducers';
+import { moviesUpdateActionMapper, moviesClickActionMapper } from "../redux/action-mappers";
+import { GenericPage } from './GenericPage';
+import { connect } from 'react-redux';
+
+//! For Redux
+const mapStateToProps = (state: IState) => {
+  return {
+    ...state.moviesStore,
+    // ...state.player
+  }
+}
+
+const mapDispatchToProps = {
+  moviesClickActionMapper,
+  moviesUpdateActionMapper
+}
+// Connect is a higher order component. This creates a container that has access to the global state
+// We can create other containers depending on the page we are one
+const GenericReduxContainer = connect(mapStateToProps, mapDispatchToProps)(GenericPage);
+//! End of Redux
 
 
 
@@ -44,6 +65,7 @@ export class MoviesListPage extends React.Component<any, any> {
             })}
           </tbody>
         </Table>
+        <GenericReduxContainer></GenericReduxContainer>
       </Container>
     )
   }
