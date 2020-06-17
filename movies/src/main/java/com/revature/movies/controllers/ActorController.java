@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import com.revature.movies.exceptions.ActorNotFoundException;
+
 import com.revature.movies.models.Actor;
+
 import com.revature.movies.services.ActorServices; 
  
  
@@ -28,6 +30,8 @@ public class ActorController {
   public List<Actor> getAllActors()  { 
      return actorServices.getAll(); 
 } 
+  
+  
   
   // I Don't believe we will need this functionality, but it was proof of concept for testing purposes.
   @GetMapping("/actors/{id}")

@@ -12,4 +12,6 @@ import com.revature.movies.models.Actor;
 public interface ActorRepository extends JpaRepository  <Actor, Integer> {
   @Query("select a from Actor a order by a.actorName")
  List<Actor> findAllSorted();
+  
+  
 }
