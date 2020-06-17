@@ -30,6 +30,7 @@ export class LandingPage extends React.Component<any, any> {
         <p>This page is where the user is directed upon logging in or they they go to if they are a guest.</p>
         <ExampleActorsBackend></ExampleActorsBackend>
         <GenericPage onClick={moviesClickActionMapper}></GenericPage>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/6JnN1DmbqoU"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ></iframe>
       </div>
     )
   }

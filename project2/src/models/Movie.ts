@@ -47,5 +47,6 @@ export class Movie
         this.trailer = trailer;
         this.genres = genres;
         this.actors = actors;
+        
     }
 }
