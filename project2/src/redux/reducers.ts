@@ -25,7 +25,8 @@ const initialMovieState : IMoviesState = {
   userListId: 1,
 }
 
-export const moviesReducer = (state: IMoviesState=initialMovieState, action: AnyAction): IMoviesState => {
+export const moviesReducer = (state: IMoviesState=initialMovieState, action: AnyAction) => {
+  console.log("inside the movies reducer")
   switch(action.type) {
     //TODO: Do we want the focus movie?
     // case moviesTypes.MOVIE_GET_CLICK: {
@@ -56,48 +57,9 @@ export const moviesReducer = (state: IMoviesState=initialMovieState, action: Any
   }
 }
 
-//! LATER -------------------------------------------------------------------
-// // Thus far we just have one reducer.  We're going to set this file
-// // up to potentially use multiple reducers in the future.  We'd just
-// // add them to the following interface and combineReducers function.
-
-// // A second reducer:
-// export interface IPlayerState {
-//   players: string[];
-// }
-
-// const initialPlayerState: IPlayerState = {
-//   players: ['Alice', 'Bob'],
-// }
-
-// export const playerReducer = (state:IPlayerState = initialPlayerState, action: AnyAction) => {
-//   //not really necessary switch, since we have only one action type
-//   switch(action.type) {
-//     case playerTypes.SET_NAME: {
-//       if(action.payload.player === 0 || action.payload.player === 1) {
-//         //Make a copy of the players currently in state
-//         const players = state.players.slice();
-//         //Modify that copy, updating the appropriate player's name
-//         players[action.payload.player] = action.payload.name;
-//         //Return new state, including the modified copy just produced
-//         return {
-//           //not necessary default since only one property
-//           ...state,
-//           players: players
-//         }
-//       } else {
-//         return state;
-//       }
-//     }
-//     default:
-//       return state;
-//   }
-// }
-//! LATER -------------------------------------------------------------------
-
 // interface for all of our state
 export interface IState {
-  movies: IMoviesState,
+  moviesStore: IMoviesState,
   // player: IPlayerState,
 }
 
@@ -105,7 +67,7 @@ export interface IState {
 // all actions can take place on state and they go to the
 // appropriate reducer
 export const state = combineReducers<IState>({
-  movies: moviesReducer,
+  moviesStore: moviesReducer,
   // player: playerReducer,
 })
 

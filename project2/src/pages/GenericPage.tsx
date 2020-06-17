@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 
 interface IGenericPageProps {
-  onClick: (userListId: number) => any;
+  moviesClickActionMapper: (userListId: number) => any;
 }
 interface IGenericPageState {
   test: string;
@@ -17,8 +17,9 @@ export class GenericPage extends React.Component<IGenericPageProps, IGenericPage
   }
 
   getUserList = (e: any) => {
-    console.log(e.currentTarget)
-    this.props.onClick(3);
+    console.log(e.currentTarget);
+    console.log(e.currentTarget.value);
+    this.props.moviesClickActionMapper(3);
   }
 
   render() {

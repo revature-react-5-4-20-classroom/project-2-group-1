@@ -13,7 +13,7 @@ export async function getAllMovies(): Promise<Movie[]>
     return response.data.map((movieObj: any)=>{
         const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer} = movieObj;
 
-        var temp = new Movie(movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer);
+        var temp = new Movie(movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, [], []);
         
         return temp;
     })
@@ -24,7 +24,7 @@ export async function  getMovieBy(title: string): Promise<Movie[]>
     const response = await movieClient.get(`/movies/${title}`);
     return response.data.map((movieObj: any)=>{
         const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer} = movieObj
-        return new Movie(movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer)
+        return new Movie(movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, [], [])
     })
     
 }
