@@ -33,19 +33,20 @@ export class Movie
       genres: string[],
       actors: string[])
     {
-        this.movieId = movieId,
-        this.imdbId = imdbId,
-        this.title = title,
-        this.rated = rated, 
-        this.released = released,
-        this.runtime = runtime,
-        this.director = director,
-        this.plot = plot,
-        this.poster = poster,
-        this.imdbRating = imdbRating,
-        this.metascore = metascore,
-        this.trailer = trailer,
-        this.genres = genres,
-        this.actors = actors
+        this.movieId = movieId;
+        this.imdbId = imdbId;
+        this.title = title;
+        this.rated = rated; 
+        this.released = released;
+        this.runtime = runtime;
+        this.director = director;
+        this.plot = plot;
+        this.poster = poster;
+        this.imdbRating = imdbRating;
+        this.metascore = metascore;
+        this.trailer = trailer;
+        this.genres = genres;
+        this.actors = actors;
+        
     }
 }
