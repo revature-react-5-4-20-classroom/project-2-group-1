@@ -30,11 +30,7 @@ public class UserController {
      return userServices.getAll(); 
 } 
  
- // @PostMapping("/users/register")
-  //public Optional<User> login (User user) {
-	//  return userServices.getRegistered(user);
- 
-  //}
+
   
   // To store values on a session similar to express session, just add HttpSession as a parameter to
   // your Controller method
@@ -45,10 +41,13 @@ public class UserController {
 	  
     Boolean isLoggedIn = userServices.checkCredentials(creds.getUsername(), creds.getPassword());
     session.setAttribute("isLoggedIn", isLoggedIn);
-    return isLoggedIn;
+   // if(isLoggedIn) {
+    	return isLoggedIn;
+    }
+    
   }
   
-}  
+
 	 
 	  
 
