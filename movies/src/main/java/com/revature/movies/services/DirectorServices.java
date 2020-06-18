@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import com.revature.movies.models.Director;
+import com.revature.movies.models.Movie;
 import com.revature.movies.repositories.DirectorRepository;
 
 
@@ -18,7 +19,7 @@ public class DirectorServices implements DirectorServicesInterface {
   
   @Override
   public List<Director> getAll() {
-   return directorRepository.findAllSorted();
+   return directorRepository.findAll();
   }
   
   

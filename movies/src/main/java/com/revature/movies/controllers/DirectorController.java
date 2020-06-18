@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping; 
 import org.springframework.web.bind.annotation.RestController;
 import com.revature.movies.models.Director;
+import com.revature.movies.models.Movie;
 import com.revature.movies.services.DirectorServices; 
  
  
@@ -14,7 +15,7 @@ public class DirectorController {
   DirectorServices directorServices; 
    
   @GetMapping("/directors") 
-  public List<Director> GetAllActors()  { 
+  public List<Director> GetAllMovies()  { 
      return directorServices.getAll(); 
 } 
 } 
