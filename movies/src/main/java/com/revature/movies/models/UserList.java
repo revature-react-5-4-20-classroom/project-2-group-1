@@ -28,7 +28,7 @@ public class UserList {
 
   @JoinColumn(name = "listowner")
   @ManyToOne(fetch = FetchType.EAGER)
-  @JsonIgnoreProperties({"listowner", "ListOwner", "listOwner"})
+  @JsonIgnoreProperties({"userLists", "password", "email"}) //"listowner", "ListOwner", "listOwner"
     private User listOwner;
   
   //@ManyToMany
@@ -50,11 +50,12 @@ public class UserList {
     this.userListId = userListId;
   }
 
-  public User getUser() {
+
+  public User getListOwner() {
     return listOwner;
   }
 
-  public void setUser(User listOwner) {
+  public void setListOwner(User listOwner) {
     this.listOwner = listOwner;
   }
 
