@@ -2,14 +2,18 @@ package com.revature.movies.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 //import javax.persistence.JoinColumn;
 //import javax.persistence.JoinTable;
 //import javax.persistence.ManyToMany;
 //import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="userlist", schema="project2")
@@ -18,44 +22,39 @@ public class UserList {
   @Column(name="userlistid")
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int userListId;
- // @ManyToOne
-  //@JoinColumn(name="userid")
-  @Column(name="userid")
-    private int userId;
+  
+  @Column(name="listname")
+  private String listName;
+
+  @JoinColumn(name = "listowner")
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JsonIgnoreProperties({"listowner", "ListOwner", "listOwner"})
+    private User listOwner;
+  
   //@ManyToMany
   //@JoinTable(name = "listjoin", joinColumns= @JoinColumn(name = "movieid"),
    //inverseJoinColumns = @JoinColumn(name = "userlistid"))
-  @Column(name="listname")
-  private String listName;
+
   
   public UserList() {
     super();
   
   }
 
-  public UserList(int userListId, int userId, String listName) {
-    super();
-    this.userListId = userListId;
-    this.userId = userId;
-    this.listName = listName;
-  }
-
-  @Override
-  public String toString() {
-    return "UserList [userListId=" + userListId + ", userId=" + userId + ", listName=" + listName
-        + "]";
-  }
-
   public int getUserListId() {
     return userListId;
   }
 
-  public int getUserId() {
-    return userId;
+  public void setUserListId(int userListId) {
+    this.userListId = userListId;
   }
 
-  public void setUserId(int userId) {
-    this.userId = userId;
+  public User getUser() {
+    return listOwner;
+  }
+
+  public void setUser(User listOwner) {
+    this.listOwner = listOwner;
   }
 
   public String getListName() {
@@ -65,5 +64,19 @@ public class UserList {
   public void setListName(String listName) {
     this.listName = listName;
   }
+
+  public UserList(int userListId, User listOwner, String listName) {
+    super();
+    this.userListId = userListId;
+    this.listOwner = listOwner;
+    this.listName = listName;
+  }
+
+  @Override
+  public String toString() {
+    return "UserList [userListId=" + userListId + ", listOwner=" + listOwner + ", listName=" + listName + "]";
+  }
+
+
   
 }
