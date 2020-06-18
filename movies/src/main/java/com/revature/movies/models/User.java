@@ -1,11 +1,15 @@
 package com.revature.movies.models;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="users", schema="project2")
@@ -22,27 +26,31 @@ public class User {
   private String email;
   
   
+  @OneToMany(mappedBy = "listOwner", cascade = CascadeType.MERGE)
+  @JsonIgnoreProperties({"user", "userlists"})
+  private List<UserList> userLists;
+  
   public User () {
     super();
   }
-  
-  
-  
-  
-  
-  public User(String username, String password, String email) {
+
+  public User(int userId, String username, String password, String email,
+      List<UserList> userLists) {
     super();
-    
+    this.userId = userId;
     this.username = username;
     this.password = password;
     this.email = email;
-    }
-
+    this.userLists = userLists;
+  }
 
   public int getUserId() {
     return userId;
   }
 
+  public void setUserId(int userId) {
+    this.userId = userId;
+  }
 
   public String getUsername() {
     return username;
@@ -52,7 +60,6 @@ public class User {
     this.username = username;
   }
 
-
   public String getPassword() {
     return password;
   }
@@ -61,20 +68,29 @@ public class User {
     this.password = password;
   }
 
-
   public String getEmail() {
     return email;
   }
-
 
   public void setEmail(String email) {
     this.email = email;
   }
 
+  public List<UserList> getUserLists() {
+    return userLists;
+  }
 
- @Override
+  public void setUserLists(List<UserList> userLists) {
+    this.userLists = userLists;
+  }
+
+  @Override
   public String toString() {
     return "User [userId=" + userId + ", username=" + username + ", password=" + password
-        + ", email=" + email + "]";
+        + ", email=" + email + ", userLists=" + userLists + "]";
   }
+  
+  
+  
+  
 }
