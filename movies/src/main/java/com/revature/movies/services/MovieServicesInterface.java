@@ -10,5 +10,6 @@ public interface MovieServicesInterface {
 
 	public List<Movie> getAll();
 	public Movie getByTitle(String title);
+	public List<Movie> getMoviesWithDirector();
 
 }

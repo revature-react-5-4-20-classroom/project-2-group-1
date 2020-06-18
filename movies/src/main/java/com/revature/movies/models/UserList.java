@@ -33,9 +33,9 @@ public class UserList {
   
   }
 
-  public UserList(int userListId, int userId, String listName) {
+  public UserList(int userId, String listName) {
     super();
-    this.userListId = userListId;
+    
     this.userId = userId;
     this.listName = listName;
   }

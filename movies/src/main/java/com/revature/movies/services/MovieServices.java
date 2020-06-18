@@ -2,6 +2,7 @@ package com.revature.movies.services;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import com.revature.movies.models.Movie;
 import com.revature.movies.repositories.MovieRepository;
@@ -23,6 +24,10 @@ public class MovieServices implements MovieServicesInterface  {
 	 return movieRepository.findByTitle(title);
   }
   
+  @Override
+  public List<Movie> getMoviesWithDirector() {
+	  return movieRepository.findAll();
+  }
   
 }
   

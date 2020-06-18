@@ -1,15 +1,22 @@
   package com.revature.movies.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -29,10 +36,13 @@ public class Movie {
   private String released;
   @Column(name="runtime")
   private String runtime;
-  //@ManyToOne
-  //@JoinColumn(name="directorid")
   @Column(name="directorid")
   private int directorId;
+  //private String directorName;
+  @ManyToMany(cascade=CascadeType.ALL)
+  @JoinTable(name="actorsjoin",schema = "project2",joinColumns=@JoinColumn(name="movieid"),inverseJoinColumns=@JoinColumn(name="actorid") )
+  @JsonIgnoreProperties({"movies"})
+  private List<Actor> actors=new ArrayList<Actor>(150);
   @Column(name="plot")
   private String plot;
   @Column(name="poster")
@@ -44,18 +54,22 @@ public class Movie {
   @Column(name="trailer")
   private String trailer;
   
+  
+  
   public Movie() {
     super();}
 
 
-  public Movie(int movieid, String imdbid, String title, String rated, String released, String runtime, int directorid, String plot, String poster, int imdbrating, double metascore, String trailer) {
-    this.movieId=movieid;
+  public Movie(String imdbid, String title, String rated, String released, String runtime,int directorsId, String directorsName, String plot, String poster, int imdbrating, double metascore, String trailer) {
+    
     this.imdbId=imdbid;
     this.title=title;
     this.rated=rated;
     this.released=released;
     this.runtime=runtime;
-    this.directorId=directorid;
+    this.directorId=directorsId;
+    //this.directorName=directorsName;
+    //this.actor=actor;
     this.plot=plot;
     this.poster=poster;
     this.imdbRating=imdbrating;
@@ -65,27 +79,51 @@ public class Movie {
 
   @Override
   public String toString() {
+	 
     return "Movie [movieId=" + movieId + ", imdbId=" + imdbId + ", title=" + title + ", rated="
-        + rated + ", released=" + released + ", runtime=" + runtime + ", directorId=" + directorId + ", plot=" + plot + ", poster="
+        + rated + ", released=" + released + ", runtime=" + runtime + ", directorId=" + directorId +/* ", directors Name=" + directorName + */", plot=" + plot + ", poster="
         + poster + ", imdbRating=" + imdbRating + ", metascore=" + metascore + ", trailer="
         + trailer + "]";
   }
-
-
+ 
+  
   public int getMovieId() {
     return movieId;
   }
 
 
+  public int getDirectorId() {
+	  return directorId;
+  }
+
+  public void setDirectorId(int dirid) {
+	  this.directorId = dirid;
+  }
   
+  /*public String getDirectorName () {
+	  return directorName;
+  }
 
-
+  public void setDirectorName(String name) {
+	  this.directorName = name;
+  }*/
+  
   public String getImdbId() {
     return imdbId;
   }
 
 
-  public void setImdbId(String imdbId) {
+  public List<Actor> getActors() {
+	return actors;
+}
+
+
+public void setActors(List<Actor> actors) {
+	this.actors = actors;
+}
+
+
+public void setImdbId(String imdbId) {
     this.imdbId = imdbId;
   }
 
@@ -130,16 +168,8 @@ public class Movie {
   }
 
 
-  public int getDirectorId() {
-    return directorId;
-  }
-
-
-  public void setDirectorId(int directorId) {
-    this.directorId = directorId;
-  }
-
-
+  
+  
   public String getPlot() {
     return plot;
   }
@@ -189,4 +219,5 @@ public class Movie {
     this.trailer = trailer;
   }
 
+  
 }
