@@ -11,22 +11,21 @@ export async function getAllMovies(): Promise<Movie[]>
 {
     const response = await movieClient.get("/movies");
     return response.data.map((movieObj: any)=>{
-        const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer} = movieObj;
+        const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors} = movieObj;
 
-        var temp = new Movie(movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, [], []);
+        var temp = new Movie(movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors);
         
         return temp;
     })
 }
 
-export async function  getMovieBy(title: string): Promise<Movie[]>
+export async function getMovieByTitle(movieTitle: string): Promise<Movie>
 {
-    const response = await movieClient.get(`/movies/${title}`);
-    return response.data.map((movieObj: any)=>{
-        const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer} = movieObj
-        return new Movie(movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, [], [])
-    })
-    
+    console.log(movieTitle);
+    const response = await movieClient.get(`/movies/${movieTitle}`);
+    console.log("After the backend has been queryed");
+    const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors} =  response.data;
+    return new Movie(movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors);
 }
 
 // // Get the userList by userListId
