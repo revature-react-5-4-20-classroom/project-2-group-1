@@ -32,17 +32,12 @@ public class UserController {
  
 
   
-  // To store values on a session similar to express session, just add HttpSession as a parameter to
-  // your Controller method
-  // Then use methods on the session to set/get attributes
+ 
   @PostMapping("/users/login")
-  public Boolean attemptLogin(@RequestBody Credentials creds, HttpSession session) {
-	  System.out.println(creds.getUsername() + ' ' + creds.getPassword());
+  public User attemptLogin(@RequestBody Credentials creds, HttpSession session) {
 	  
-    Boolean isLoggedIn = userServices.checkCredentials(creds.getUsername(), creds.getPassword());
-    session.setAttribute("isLoggedIn", isLoggedIn);
-   // if(isLoggedIn) {
-    	return isLoggedIn;
+	  	return userServices.checkCredentials(creds.getUsername(), creds.getPassword());
+    	
     }
     
   }

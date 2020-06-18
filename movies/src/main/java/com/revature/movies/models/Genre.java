@@ -28,10 +28,9 @@ public class Genre {
     
   }
 
-  public Genre(int genreId, String genreName) {
+  public Genre(String genreName) {
     super();
-    this.genreId = genreId;
-    this.genreName = genreName;
+        this.genreName = genreName;
   }
 
   @Override

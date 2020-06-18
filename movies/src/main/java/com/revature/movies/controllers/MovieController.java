@@ -38,6 +38,20 @@ public class MovieController {
      return movieServices.getAll(); 
  }  
    
+   @GetMapping("/directors")
+   public List<Movie> findAllMoviesWithDirector() {
+	     try {
+	    	
+	       return movieServices.getMoviesWithDirector();
+	     } catch (MovieNotFoundException e) {
+	       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No movies found with that title", e);
+	     }
+	   }
+
+   
+
+  
+	   
    
 } 
   
