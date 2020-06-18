@@ -27,7 +27,7 @@ public class User {
   
   
   @OneToMany(mappedBy = "listOwner", cascade = CascadeType.MERGE)
-  @JsonIgnoreProperties({"user", "userlists"})
+  @JsonIgnoreProperties({"listOwner"}) //"user", "userlists"
   private List<UserList> userLists;
   
   public User () {
@@ -75,6 +75,8 @@ public class User {
   public void setEmail(String email) {
     this.email = email;
   }
+
+
 
   public List<UserList> getUserLists() {
     return userLists;
