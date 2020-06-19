@@ -5,7 +5,7 @@ import { MoviePreview } from '../components/moviePreview';
 import { Table, Container } from 'reactstrap';
 import { ExampleActorsBackend } from '../components/ExampleActorsBackend';
 import { IState } from '../redux/reducers';
-import { moviesUpdateActionMapper, moviesClickActionMapper } from "../redux/action-mappers";
+import { moviesUpdateActionMapper, userListIdActionMapper } from "../redux/action-mappers";
 import { GenericPage } from './GenericPage';
 import { connect } from 'react-redux';
 
@@ -18,7 +18,7 @@ const mapStateToProps = (state: IState) => {
 }
 
 const mapDispatchToProps = {
-  moviesClickActionMapper,
+  userListIdActionMapper,
   moviesUpdateActionMapper
 }
 // Connect is a higher order component. This creates a container that has access to the global state
