@@ -25,6 +25,11 @@ public class UserListServices implements UserListServicesInterface {
   public List<UserList> findByUserId(Integer id) {
     return userListRepository.findByUserId(id);
   }
+
+  @Override
+  public UserList findByListId(Integer id) {
+    return userListRepository.findByListId(id);
+  }
   
   
   
