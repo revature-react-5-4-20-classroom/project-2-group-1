@@ -76,7 +76,7 @@ export class App extends React.Component<any, any> {
                   />}
                 />
                 {/* We will use title from our db */}
-                <Route path="/movie/:title" render={(props) => 
+                <Route path="/movies/title/:title" render={(props) => 
                   <MoviePage 
                     {...props}
                   />}
