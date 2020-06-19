@@ -17,6 +17,7 @@ import { toggle } from "./components/toggleComponent";
 import { getAllUserLists } from "./api/movieClient";
 import { userListsActionMapper, moviesUpdateActionMapper } from "./redux/action-mappers";
 import { IState } from "./redux/reducers";
+import { User } from "./models/Users";
 
 //! For Redux
 const mapStateToPropsMovies = (state: IState) => {
@@ -44,6 +45,18 @@ export class App extends React.Component<any, any> {
     }
   }
 
+  updateLoggedInuser = (user: User) =>{
+    this.setState({
+      loggedInUser: user
+    });
+  };
+
+  logoutUser =()=>{
+    this.setState({
+      loggedInUser: null, 
+    });
+  };
+
   toggleTheme = () =>{
     if(this.state.theme === 'light')
     {
@@ -67,13 +80,14 @@ export class App extends React.Component<any, any> {
           <Provider store={store}>
             <Router>
               <NavBar 
+                logoutUser={this.logoutUser}
                 loggedInUser = {this.state.loggedInUser}
                 toggleTheme={this.toggleTheme}
               />
 
               <Switch>
                 <Route path="/login" render={(props) => 
-                  <LoginPage
+                  <LoginPage loggedInUser={this.state.loggedInUser} updateUser={this.updateLoggedInuser}
                     {...props}
                   />}
                 />

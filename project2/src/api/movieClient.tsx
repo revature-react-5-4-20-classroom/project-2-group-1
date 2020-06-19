@@ -2,6 +2,7 @@ import axios from 'axios';
 import {Movie} from "../models/Movie"
 import {basename} from "path"
 import { objectArrayToStringArray } from '../utils';
+import { User } from '../models/Users';
 
 
 
@@ -86,6 +87,40 @@ export async function getUserListByListId(listId: number): Promise<any>
     }
 }
 
+export async function login(un: string, pw: string): Promise<User>{
+    try{
+        console.log("In the backend client log in function");
+        const response = await movieClient.post("users/login", {username: un, password: pw});
+        const {id, username, password, email} = response.data;
+        return new User(id, username, password, email)
+    }
+    catch(e){
+        if(e.response.status===401){
+            throw new Error(`Failed to authenticate with username: ${un}`);
+        }
+        else{
+            throw new Error("There was a problem logging in");
+        }
+    }
+}
+
+export async function submitUser(u: User)
+{
+    try 
+    {
+        const response = await movieClient.post("users/register", {
+            id: 0,
+            username: u.username,
+            password: u.password, 
+            email: u.email
+
+        })
+    }
+    catch(e)
+    {
+        throw(e.message)
+    }
+}
 
 // Get all userLists
 export async function getAllUserLists(): Promise<any> //Promise<UserLists>
