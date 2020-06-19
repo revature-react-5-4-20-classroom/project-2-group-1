@@ -4,7 +4,6 @@ import { getUserListBy } from '../api/movieClient';
 import { Movie } from '../models/Movie';
 
 interface IGenericPageProps {
-  userListIdActionMapper: (userListId: number) => any;
   moviesUpdateActionMapper: (movies: Movie[]) => any;
 }
 interface IGenericPageState {
@@ -23,11 +22,10 @@ export class GenericPage extends React.Component<IGenericPageProps, IGenericPage
     console.log(e.currentTarget);
     console.log(e.currentTarget.value);
     // Serach for user list where user id === 2
-    let { movies, listName, listOwner, userListId } = await getUserListBy(1)
+    let { movies, listName, listOwner, userListId } = await getUserListBy(1);
     // Updates the userListId to 3
     console.log(listName);
     console.log(listOwner);
-    this.props.userListIdActionMapper(userListId);
     this.props.moviesUpdateActionMapper(movies);
   }
 

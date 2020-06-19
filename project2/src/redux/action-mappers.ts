@@ -3,7 +3,7 @@ import { Movie } from "../models/Movie"
 //Specifying the action types that are possible in our movies application
 export const moviesTypes = {
   // MOVIE_GET_CLICK: 'MOVIE_GET_CLICK',
-  MOVIES_GET_CLICK: 'MOVIES_GET_LIST',
+  GET_USER_LISTS: 'GET_USER_LISTS',
   UPDATE_MOVIES: 'UPDATE_MOVIES'
 }
 
@@ -19,12 +19,12 @@ export const moviesTypes = {
 // }
 
 // For changing user list id in the global state
-export const userListIdActionMapper = (userListId: number) => {
-  console.log("YO")
+export const userListsActionMapper = (userLists: any[]) => {
+  console.log(userLists);
   return {
-    type: moviesTypes.MOVIES_GET_CLICK,
+    type: moviesTypes.GET_USER_LISTS,
     payload: {
-      userListId
+      userLists
     }
   }
 }
