@@ -54,6 +54,7 @@ export class MoviesListPage extends React.Component<any, any> {
     }
   }
 
+
   render() {
     return (
       <Container>

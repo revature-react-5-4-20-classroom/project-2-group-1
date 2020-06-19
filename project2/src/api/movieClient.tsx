@@ -6,7 +6,7 @@ import { objectArrayToStringArray } from '../utils';
 
 
 const movieClient = axios.create({
-    baseURL: "http://localhost:8080", 
+    baseURL: "http://ec2-18-223-3-0.us-east-2.compute.amazonaws.com:7773/", 
     withCredentials: true, 
 })
 
