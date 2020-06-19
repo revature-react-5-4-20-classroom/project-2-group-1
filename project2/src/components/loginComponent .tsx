@@ -11,6 +11,7 @@ import {
   Col,
 } from "reactstrap";
 import { User } from "../models/Users";
+import { login } from "../api/movieClient";
 
 
 export class LoginComponent extends React.Component<any, any> {
@@ -34,24 +35,28 @@ export class LoginComponent extends React.Component<any, any> {
     });
   };
 
-//   attemptLogin = async (submitEvent: any) => {
-//     submitEvent.preventDefault();
-//     try {
-//       console.log("In the attemptLogin function");
-//       const loggedInUser: User = await login(
-//         this.state.username,
-//         this.state.password
-//       );
-//       this.props.updateUser(loggedInUser);
-//       this.props.history.push("/home");
-//     } 
-//     catch (e) {
-//       toast(e.message, { type: "error" });
-//       this.setState({
-//         password: "",
-//       });
-//     }
-//   };
+  attemptLogin = async (submitEvent: any) => {
+    submitEvent.preventDefault();
+    try 
+    {
+      console.log("In the attemptLogin function");
+      const loggedInUser: User = await login(
+        this.state.username,
+        this.state.password
+      );
+      this.props.updateUser(loggedInUser);
+      this.setState({
+        username: "",
+        password: ""
+      })
+      this.props.history.push("/home");
+    } 
+    catch (e) 
+    {
+      throw(e.message)
+    }
+  }
+  
 
   render() {
     return (
@@ -59,7 +64,7 @@ export class LoginComponent extends React.Component<any, any> {
         <Row>
           <Col md={{ size: 8, offset: 1}}>
           <h3>Please login to view your profile and favorite movies</h3>
-            <Form /*onSubmit={this.attemptLogin}*/>
+            <Form onSubmit={this.attemptLogin}>
               <FormGroup>
                 <Label for="username">Username</Label>
                 <Input
