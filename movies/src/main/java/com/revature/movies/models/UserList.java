@@ -29,12 +29,9 @@ public class UserList {
   @JoinColumn(name = "listowner")
   @ManyToOne(fetch = FetchType.EAGER)
   @JsonIgnoreProperties({"listowner", "ListOwner", "listOwner"})
-    private User listOwner;
+  private User listOwner;
   
-  //@ManyToMany
-  //@JoinTable(name = "listjoin", joinColumns= @JoinColumn(name = "movieid"),
-   //inverseJoinColumns = @JoinColumn(name = "userlistid"))
-
+  
   
   public UserList() {
     super();

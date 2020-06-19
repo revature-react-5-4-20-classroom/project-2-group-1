@@ -1,12 +1,11 @@
-  package com.revature.movies.models;
+ package com.revature.movies.models;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -26,6 +25,7 @@ public class Movie {
   @Column(name="movieid")
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int movieId;
+   
   @Column(name="imdbid")
   private String imdbId;
   @Column(name="title")
@@ -36,13 +36,22 @@ public class Movie {
   private String released;
   @Column(name="runtime")
   private String runtime;
-  @Column(name="directorid")
-  private int directorId;
-  //private String directorName;
+  
+  @JoinColumn(name = "directorid")
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JsonIgnoreProperties({"directors","director", "movielist"})
+  private Director director;
+  
   @ManyToMany(cascade=CascadeType.ALL)
   @JoinTable(name="actorsjoin",schema = "project2",joinColumns=@JoinColumn(name="movieid"),inverseJoinColumns=@JoinColumn(name="actorid") )
-  @JsonIgnoreProperties({"movies"})
+  @JsonIgnoreProperties({"movies", "actorid"})
   private List<Actor> actors=new ArrayList<Actor>(150);
+  
+  @ManyToMany(cascade=CascadeType.ALL)
+  @JoinTable(name="genresjoin",schema = "project2",joinColumns=@JoinColumn(name="movieid"),inverseJoinColumns=@JoinColumn(name="genreid") )
+  @JsonIgnoreProperties({"movies", "genreid"})
+  private List<Genre> genres=new ArrayList<Genre>(150);
+  
   @Column(name="plot")
   private String plot;
   @Column(name="poster")
@@ -60,69 +69,68 @@ public class Movie {
     super();}
 
 
-  public Movie(String imdbid, String title, String rated, String released, String runtime,int directorsId, String directorsName, String plot, String poster, int imdbrating, double metascore, String trailer) {
-    
-    this.imdbId=imdbid;
-    this.title=title;
-    this.rated=rated;
-    this.released=released;
-    this.runtime=runtime;
-    this.directorId=directorsId;
-    //this.directorName=directorsName;
-    //this.actor=actor;
-    this.plot=plot;
-    this.poster=poster;
-    this.imdbRating=imdbrating;
-    this.metascore=metascore;
-    this.trailer=trailer;
-  }
 
-  @Override
-  public String toString() {
-	 
-    return "Movie [movieId=" + movieId + ", imdbId=" + imdbId + ", title=" + title + ", rated="
-        + rated + ", released=" + released + ", runtime=" + runtime + ", directorId=" + directorId +/* ", directors Name=" + directorName + */", plot=" + plot + ", poster="
-        + poster + ", imdbRating=" + imdbRating + ", metascore=" + metascore + ", trailer="
-        + trailer + "]";
-  }
+
+  public Movie(int movieId, String imdbId, String title, String rated, String released, String runtime, Director director,
+		List<Actor> actors, List<Genre> genres, String plot, String poster, int imdbRating, double metascore,
+		String trailer) {
+	super();
+	this.movieId = movieId;
+	this.imdbId = imdbId;
+	this.title = title;
+	this.rated = rated;
+	this.released = released;
+	this.runtime = runtime;
+	this.director = director;
+	this.actors = actors;
+	this.genres = genres;
+	this.plot = plot;
+	this.poster = poster;
+	this.imdbRating = imdbRating;
+	this.metascore = metascore;
+	this.trailer = trailer;
+}
+
+
+
+
+@Override
+public String toString() {
+	return "Movie [movieId=" + movieId + ", imdbId=" + imdbId + ", title=" + title + ", rated=" + rated + ", released="
+			+ released + ", runtime=" + runtime + ", director=" + director + ", actors=" + actors + ", genres=" + genres
+			+ ", plot=" + plot + ", poster=" + poster + ", imdbRating=" + imdbRating + ", metascore=" + metascore
+			+ ", trailer=" + trailer + "]";
+}
  
   
-  public int getMovieId() {
+  public Director getDirector() {
+	return director;
+}
+
+
+public void setDirector(Director director) {
+	this.director = director;
+}
+
+public int getMovieId() {
     return movieId;
   }
 
-
-  public int getDirectorId() {
-	  return directorId;
-  }
-
-  public void setDirectorId(int dirid) {
-	  this.directorId = dirid;
-  }
-  
-  /*public String getDirectorName () {
-	  return directorName;
-  }
-
-  public void setDirectorName(String name) {
-	  this.directorName = name;
-  }*/
-  
-  public String getImdbId() {
-    return imdbId;
-  }
-
+public void setMovieId(int movieId) {
+	this.movieId = movieId;
+}
 
   public List<Actor> getActors() {
 	return actors;
 }
-
-
+ 
 public void setActors(List<Actor> actors) {
 	this.actors = actors;
 }
 
-
+public String getImdbId() {
+    return imdbId;
+  }
 public void setImdbId(String imdbId) {
     this.imdbId = imdbId;
   }
@@ -219,5 +227,14 @@ public void setImdbId(String imdbId) {
     this.trailer = trailer;
   }
 
-  
+
+public List<Genre> getGenres() {
+	return genres;
+}
+
+
+public void setGenres(List<Genre> genres) {
+	this.genres = genres;
+}
+
 }
