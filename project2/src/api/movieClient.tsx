@@ -15,10 +15,10 @@ export async function getAllMovies(): Promise<Movie[]>
     const response = await movieClient.get("/movies");
     return response.data.map((movieObj: any)=>{
         const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors} = movieObj;
-
-        var temp = new Movie(movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors);
-        
-        return temp;
+        let reformattedDirector = director.directorName;
+        let reformattedGenres = objectArrayToStringArray("genreName", genres);
+        let reformattedActors = objectArrayToStringArray("actorName", actors);
+        return new Movie(movieId, imdbId, title, rated, released, runtime, reformattedDirector, plot, poster, imdbRating, metascore, trailer, reformattedGenres, reformattedActors);
     })
 }
 
@@ -28,11 +28,21 @@ export async function getMovieByTitle(movieTitle: string): Promise<Movie>
     const response = await movieClient.get(`/movies/${movieTitle}`);
     console.log("After the backend has been queryed");
     const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors} =  response.data;
-    return new Movie(movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors);
+    let reformattedDirector = director.directorName;
+    let reformattedGenres = objectArrayToStringArray("genreName", genres);
+    let reformattedActors = objectArrayToStringArray("actorName", actors);
+    return new Movie(movieId, imdbId, title, rated, released, runtime, reformattedDirector, plot, poster, imdbRating, metascore, trailer, reformattedGenres, reformattedActors);
 }
 
+
+interface IPromiseGetUserListBy {
+    movies: Movie[],
+    listName: string,
+    listOwner: any,
+    userListId: number
+}
 // Get the userList by userListId
-export async function getUserListBy(userId: number): Promise<any> //Promise<Movie[]>
+export async function getUserListBy(userId: number): Promise<IPromiseGetUserListBy> //Promise<Movie[]>
 {
     // Probably going to need a try catch block here
     const response = await movieClient.get(`/userlists/${userId}`);
@@ -41,17 +51,22 @@ export async function getUserListBy(userId: number): Promise<any> //Promise<Movi
     // console.log(response.data)
     // console.log(`listName: ${listName}`);
     // console.log(`listOwner: ${listOwner}`);
-    console.log(movies);
+    // console.log(movies);
     // console.log(`userListId: ${userListId}`);
     let reduxMovies = movies.map((movie: any) => {
         const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors} = movie;
-        let reformattedDirector = "once route complete";
-        let reformattedGenres = ["Horror", "Suspense"];
+        let reformattedDirector = director.directorName;
+        let reformattedGenres = objectArrayToStringArray("genreName", genres);
         let reformattedActors = objectArrayToStringArray("actorName", actors);
         return new Movie(movieId, imdbId, title, rated, released, runtime, reformattedDirector, plot, poster, imdbRating, metascore, trailer, reformattedGenres, reformattedActors);
     })
-    console.log(reduxMovies);
-    return reduxMovies;
+    // console.log(reduxMovies);
+    return {
+        movies: reduxMovies,            
+        listName,
+        listOwner,
+        userListId
+    }
 
 }
 

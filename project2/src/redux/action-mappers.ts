@@ -19,7 +19,7 @@ export const moviesTypes = {
 // }
 
 // For changing user list id in the global state
-export const moviesClickActionMapper = (userListId: number) => {
+export const userListIdActionMapper = (userListId: number) => {
   console.log("YO")
   return {
     type: moviesTypes.MOVIES_GET_CLICK,
