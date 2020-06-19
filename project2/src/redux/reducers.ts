@@ -4,7 +4,6 @@
 
 import { AnyAction, combineReducers } from "redux"
 import { moviesTypes } from "./action-mappers"
-import { calculateWinner } from './util'
 import { Movie } from "../models/Movie"
 
 // Our tictactoe state follows the state from our Game Component

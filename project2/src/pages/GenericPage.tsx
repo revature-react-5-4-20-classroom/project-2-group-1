@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'reactstrap';
+import { getUserListBy } from '../api/movieClient';
 
 interface IGenericPageProps {
   moviesClickActionMapper: (userListId: number) => any;
@@ -19,6 +20,7 @@ export class GenericPage extends React.Component<IGenericPageProps, IGenericPage
   getUserList = (e: any) => {
     console.log(e.currentTarget);
     console.log(e.currentTarget.value);
+    getUserListBy(1);
     this.props.moviesClickActionMapper(3);
   }
 
