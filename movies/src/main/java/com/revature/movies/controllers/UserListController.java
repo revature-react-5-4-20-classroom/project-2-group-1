@@ -25,6 +25,15 @@ public class UserListController {
 } 
   
   @GetMapping("/userlists/{id}")
+  public UserList findByListId(@PathVariable Integer id) {
+    try {
+      return userListServices.findByListId(id);
+    } catch (UserListNotFoundException e) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find listh with id " + id + ".", e);
+    }
+  }
+  
+  @GetMapping("/userlists/users/{id}")
   public List<UserList> findByUserId(@PathVariable Integer id) {
     try {
       return userListServices.findByUserId(id);
@@ -32,5 +41,4 @@ public class UserListController {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with id " + id + " doesn't appear to have any lists.", e);
     }
   }
-  
 } 
