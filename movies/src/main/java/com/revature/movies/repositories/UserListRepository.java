@@ -11,4 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface UserListRepository extends JpaRepository  <UserList, Integer> {
   @Query("select ul from UserList ul order by ul.listName")
  List<UserList> findAllSorted();
+  
+  @Query("select ul from UserList ul where ul.listOwner.userId = ?1")
+  List<UserList> findByUserId(Integer userid);
 }

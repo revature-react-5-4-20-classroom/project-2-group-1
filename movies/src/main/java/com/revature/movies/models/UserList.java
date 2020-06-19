@@ -1,5 +1,8 @@
 package com.revature.movies.models;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 //import javax.persistence.JoinColumn;
 //import javax.persistence.JoinTable;
@@ -28,10 +33,7 @@ public class UserList {
 
   @JoinColumn(name = "listowner")
   @ManyToOne(fetch = FetchType.EAGER)
-  @JsonIgnoreProperties({"listowner", "ListOwner", "listOwner"})
-  private User listOwner;
-  
-  
+
   
   public UserList() {
     super();
@@ -47,11 +49,12 @@ public class UserList {
     this.userListId = userListId;
   }
 
-  public User getUser() {
+
+  public User getListOwner() {
     return listOwner;
   }
 
-  public void setUser(User listOwner) {
+  public void setListOwner(User listOwner) {
     this.listOwner = listOwner;
   }
 
@@ -62,6 +65,16 @@ public class UserList {
   public void setListName(String listName) {
     this.listName = listName;
   }
+
+  public List<Movie> getMovies() {
+    return movies;
+  }
+
+
+  public void setMovies(List<Movie> movies) {
+    this.movies = movies;
+  }
+
 
   public UserList(int userListId, User listOwner, String listName) {
     super();

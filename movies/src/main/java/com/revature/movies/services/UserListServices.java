@@ -20,6 +20,12 @@ public class UserListServices implements UserListServicesInterface {
   public List<UserList> getAll() {
    return userListRepository.findAllSorted();
   }
+
+  @Override
+  public List<UserList> findByUserId(Integer id) {
+    return userListRepository.findByUserId(id);
+  }
+  
   
   
   

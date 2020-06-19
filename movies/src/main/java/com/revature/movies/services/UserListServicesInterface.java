@@ -8,4 +8,6 @@ public interface UserListServicesInterface {
 
  public List<UserList> getAll();
  
+ public List<UserList> findByUserId(Integer id);
+ 
 }
