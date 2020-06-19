@@ -1,20 +1,16 @@
 package com.revature.movies.models;
 
 import java.util.ArrayList;
-import java.util.Collection;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -25,11 +21,10 @@ public class Actor {
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int actorId;
 
-  @JsonIgnoreProperties({"actors"})
+  @JsonIgnoreProperties({"actors", "actorid"})
   @ManyToMany(mappedBy="actors")
-  private Collection<Movie> movies=new ArrayList<Movie>(150);
-  
- 
+  private List<Movie> movies=new ArrayList<Movie>(150);
+   
   @Column(name="actorname")
   private String actorName;
   
@@ -53,10 +48,10 @@ public class Actor {
     return actorId;
   }
  
-  public Collection<Movie> getMovies() {
+  public List<Movie> getMovies() {
 	return movies;
 }
-public void setMovies(Collection<Movie> movies) {
+public void setMovies(List<Movie> movies) {
 	this.movies = movies;
 }
 public String getActorName() {

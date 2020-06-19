@@ -25,7 +25,6 @@ public class User {
   @Column(name="email")
   private String email;
   
-  
   @OneToMany(mappedBy = "listOwner", cascade = CascadeType.MERGE)
   @JsonIgnoreProperties({"listOwner"}) //"user", "userlists"
   private List<UserList> userLists;
