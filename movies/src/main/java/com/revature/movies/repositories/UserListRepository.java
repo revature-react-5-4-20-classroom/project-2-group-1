@@ -1,6 +1,8 @@
 package com.revature.movies.repositories;
 
 
+import com.revature.movies.models.Movie;
+import com.revature.movies.models.User;
 import com.revature.movies.models.UserList;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

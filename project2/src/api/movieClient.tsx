@@ -36,6 +36,48 @@ export async function getMovieByTitle(movieTitle: string): Promise<Movie>
 }
 
 
+
+export async function login(un: string, pw: string): Promise<User>{
+    try{
+        console.log("In the backend client log in function");
+        const response = await movieClient.post("users/login", {username: un, password: pw});
+        const {userId, username, password, email} = response.data;
+        return new User(userId, username, password, email)
+    }
+    catch(e){
+        if(e.response.status===401){
+            throw new Error(`Failed to authenticate with username: ${un}`);
+        }
+        else{
+            throw new Error("There was a problem logging in");
+        }
+    }
+}
+
+export async function submitUser(u: User)
+{
+    try 
+    {
+        const response = await movieClient.post("users/register", {
+            id: 0,
+            username: u.username,
+            password: u.password, 
+            email: u.email
+
+        })
+    }
+    catch(e)
+    {
+        throw(e.message)
+    }
+}
+
+
+
+
+//! USER LIST STUFF
+
+
 interface IPromiseGetUserListBy {
     movies: Movie[],
     listName: string,
@@ -85,41 +127,6 @@ export async function getUserListByListId(listId: number): Promise<any>
         listName,
         listOwner,
         userListId
-    }
-}
-
-export async function login(un: string, pw: string): Promise<User>{
-    try{
-        console.log("In the backend client log in function");
-        const response = await movieClient.post("users/login", {username: un, password: pw});
-        const {userId, username, password, email} = response.data;
-        return new User(userId, username, password, email)
-    }
-    catch(e){
-        if(e.response.status===401){
-            throw new Error(`Failed to authenticate with username: ${un}`);
-        }
-        else{
-            throw new Error("There was a problem logging in");
-        }
-    }
-}
-
-export async function submitUser(u: User)
-{
-    try 
-    {
-        const response = await movieClient.post("users/register", {
-            id: 0,
-            username: u.username,
-            password: u.password, 
-            email: u.email
-
-        })
-    }
-    catch(e)
-    {
-        throw(e.message)
     }
 }
 

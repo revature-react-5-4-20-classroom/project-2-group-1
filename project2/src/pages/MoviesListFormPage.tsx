@@ -42,8 +42,8 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
     // Remove the movie from the list
     try 
     {
-      let { movies } = await getUserListBy(this.props.loggedInUser.userId);
-      this.props.moviesUpdateActionMapper(movies);
+      let { movies, listName, listOwner, userListId } = await getUserListBy(this.props.loggedInUser.userId);
+      
     }
     catch(e)
     {

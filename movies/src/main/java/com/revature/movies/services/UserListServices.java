@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+import com.revature.movies.models.Movie;
+import com.revature.movies.models.User;
 import com.revature.movies.models.UserList;
 import com.revature.movies.repositories.UserListRepository;
 
@@ -30,8 +32,5 @@ public class UserListServices implements UserListServicesInterface {
   public UserList findByListId(Integer id) {
     return userListRepository.findByListId(id);
   }
-  
-  
-  
   
 }
