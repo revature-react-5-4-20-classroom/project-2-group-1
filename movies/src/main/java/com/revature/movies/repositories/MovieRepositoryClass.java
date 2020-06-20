@@ -30,7 +30,20 @@ public class MovieRepositoryClass {
 			
 	}
 	
-
+	@Transactional
+	public void addNewGenres(List<Genre> genre)  {
+		System.out.println(genre.toString());
+		
+		for (Genre g : genre) {
+			
+			  int result = entityManager.createNativeQuery("INSERT INTO project2.genres (genreid, genrename) VALUES (DEFAULT, ?)")
+			      .setParameter(1, g.getGenreName())
+			      .executeUpdate();
+			   System.out.println(result);
+		}
+			
+	}
+	
 	//@Transactional
 	/*public void addNewMovie(int movieId, String imdbId, String title, String rated, String released, String runtime, Director director, List<Actor> actors, List<Genre> genres, String plot, String poster, int imdbRating, double metascore, String trailer) {
 		entityManager.merge(actors);

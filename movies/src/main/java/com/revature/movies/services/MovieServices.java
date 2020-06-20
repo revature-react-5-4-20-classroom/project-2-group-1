@@ -41,6 +41,11 @@ public class MovieServices implements MovieServicesInterface  {
 	  movieRepositoryClass.addNewActors(actors);
   }
   
+  public void addNewGenres(List<Genre> genres) {
+	  System.out.println(genres.toString());
+	  movieRepositoryClass.addNewGenres(genres);
+  }
+  
   
   /*public void addNewMovie(int movieId, String imdbId, String title, String rated, String released, String runtime, Director director, List<Actor> actors, List<Genre> genres, String plot, String poster, int imdbRating, double metascore, String trailer) { 
   
