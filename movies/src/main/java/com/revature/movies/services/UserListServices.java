@@ -32,5 +32,22 @@ public class UserListServices implements UserListServicesInterface {
   public UserList findByListId(Integer id) {
     return userListRepository.findByListId(id);
   }
+
+  @Override
+  public int patchListName(String userListName, Integer userListId) {
+    return userListRepository.patchListName(userListName, userListId);
+  }
+// Working on this.
+  @Override
+  public UserList addUserList(UserList userList, Integer userId) {
+    userList.setUserListId(0);
+    System.out.println(userList.getUserListId());
+    return userListRepository.save(userList);
+  }
+
+  @Override
+  public int deleteUserList(Integer userListId) {
+    return userListRepository.deleteUserList(userListId);
+  }
   
 }

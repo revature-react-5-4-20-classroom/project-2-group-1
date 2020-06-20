@@ -146,7 +146,7 @@ export async function getAllUserLists(): Promise<any> //Promise<UserLists>
 export async function deleteMovieFromUserList(movieId: number, userListId: number): Promise<any>
 {
     try {
-        const response = await movieClient.delete(`/userlists/${userListId}`, {data: {movieId: movieId}});
+        const response = await movieClient.delete(`/userlists/movie/${movieId}`, {data: {userListId: userListId}});
         console.log("After the backend has been queryed");
         // This should return how many movies were deleted
         return response.data;
@@ -160,7 +160,7 @@ export async function deleteMovieFromUserList(movieId: number, userListId: numbe
 export async function addMovieToUserList(movieId: number, userListId: number): Promise<any>
 {
     try {
-        const response = await movieClient.post(`/userlists/${userListId}`, {movieId: movieId});
+        const response = await movieClient.post(`/userlists/movie/${movieId}`, {userListId: userListId});
         console.log("After the backend has been queryed");
         // This should return how many movies were added
         return response.data;

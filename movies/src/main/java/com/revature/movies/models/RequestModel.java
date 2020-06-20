@@ -1,20 +1,22 @@
 package com.revature.movies.models;
 
 public class RequestModel {
-  private Integer movieId;
+  
+  private Integer userListId;
 
-  public Integer getMovieId() {
-    return movieId;
+
+
+  public Integer getUserListId() {
+    return userListId;
   }
 
-  public void setMovieId(Integer movieId) {
-    this.movieId = movieId;
+
+
+  public void setUserListId(Integer userListId) {
+    this.userListId = userListId;
   }
 
-  public RequestModel(Integer movieId) {
-    super();
-    this.movieId = movieId;
-  }
+
 
   public RequestModel() {
     super();
