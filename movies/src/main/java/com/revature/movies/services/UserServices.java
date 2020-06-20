@@ -1,12 +1,11 @@
 package com.revature.movies.services;
 
 import java.util.List;
-//import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.revature.movies.models.User;
-import com.revature.movies.repositories.UserRepository;
+import com.revature.movies.repositories.UserRepositoryClass;
+import com.revature.movies.repositories.UserRepositoryInterface;
 
 
 
@@ -14,18 +13,28 @@ import com.revature.movies.repositories.UserRepository;
 public class UserServices implements UserServicesInterface {
   
   @Autowired
-  UserRepository userRepository;
+  UserRepositoryInterface userRepositoryInterface;
+  @Autowired
+  UserRepositoryClass userRepositoryClass;
   
-
+  @Override
   public User checkCredentials(String username, String password) {
    
-   List <User> list = userRepository.checkUsernamePassword(username, password);
+   List <User> list = userRepositoryInterface.checkUsernamePassword(username, password);
    return list.get(0);
  }
+  @Override
+  public void registerNewUser (User newUser)  {
+	 
+	  System.out.println(newUser.getUsername() + "+ " + newUser.getPassword() + " + " + newUser.getEmail());
+	  
+	  userRepositoryClass.registerNewUser(newUser.getUsername(), newUser.getPassword(), newUser.getEmail());
+	  
+  }
   
   @Override
   public List<User> getAll() {
-   return userRepository.findAllSorted();
+   return userRepositoryInterface.findAllSorted();
   }
   
 }

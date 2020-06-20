@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import com.revature.movies.exceptions.ActorNotFoundException;
 import com.revature.movies.exceptions.UserListNotFoundException;
 import com.revature.movies.models.Movie;
 import com.revature.movies.models.UserList; 

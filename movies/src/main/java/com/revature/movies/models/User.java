@@ -17,13 +17,13 @@ public class User {
   @Id
   @Column(name="userid")
   @GeneratedValue(strategy=GenerationType.IDENTITY)
- private int userId;
+ public int userId;
   @Column(name="username")
-  private String username;
+  public String username;
   @Column(name="password")
-  private String password;
+  public String password;
   @Column(name="email")
-  private String email;
+  public String email;
   
   @OneToMany(mappedBy = "listOwner", cascade = CascadeType.MERGE)
   @JsonIgnoreProperties({"listOwner"}) //"user", "userlists"
