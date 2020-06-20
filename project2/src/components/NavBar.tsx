@@ -9,7 +9,7 @@ import { User } from '../models/Users';
 interface INavBarProps
 {
     logoutUser: () =>void;
-    loggedInUser: User | null,
+    loggedInUser: User | null;
     toggleTheme: ()=> void
 }
 

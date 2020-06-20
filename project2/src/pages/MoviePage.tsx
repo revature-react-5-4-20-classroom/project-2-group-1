@@ -23,7 +23,7 @@ export class MoviePage extends React.Component<any, any> {
     {
       var search = this.props.match.params.title.toLowerCase()
       this.setState({
-        movies: await getMovieByTitle(search)
+        movies: await getMovieByTitle("casablanca")
       })
     }
     catch(e)

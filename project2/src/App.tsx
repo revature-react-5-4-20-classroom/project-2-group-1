@@ -119,7 +119,7 @@ export class App extends React.Component<any, any> {
 
                 {/* Everything is thrown here */}
                 <Route path="/" render={(props) => 
-                  <LandingPage
+                  <LandingPage loggedInUser ={this.state.loggedInUser}
                     {...props}
                   />}
                 />
