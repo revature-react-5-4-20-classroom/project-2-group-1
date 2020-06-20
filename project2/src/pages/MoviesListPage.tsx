@@ -42,7 +42,7 @@ export class MoviesListPage extends React.Component<any, any> {
                 //return <img key={movieObj.movieId} src={movieObj.poster}/>
                 return (
                 <Col className="myColumn myPadding" key={movieObj.movieId} xl={6}>
-                    <MoviePreview movie={movieObj} deleteButton={true}/>
+                    <MoviePreview movie={movieObj} deleteButton={false}/>
                 </Col>)
             })}
         </Row>

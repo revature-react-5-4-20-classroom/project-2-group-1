@@ -28,7 +28,7 @@ export class MoviePreview extends React.Component<IMoviePreivewProps>
                     <img src={this.props.movie.poster} />
                     </Col>
                 </Row>
-                {this.props.deleteButton !== null ? 
+                {this.props.deleteButton ? 
                     <Row>
                         <Col></Col>
                         <Col>

@@ -41,8 +41,8 @@ export async function login(un: string, pw: string): Promise<User>{
     try{
         console.log("In the backend client log in function");
         const response = await movieClient.post("users/login", {username: un, password: pw});
-        const {id, username, password, email} = response.data;
-        return new User(id, username, password, email)
+        const {userId, username, password, email} = response.data;
+        return new User(userId, username, password, email)
     }
     catch(e){
         if(e.response.status===401){
@@ -59,7 +59,7 @@ export async function submitUser(u: User)
     try 
     {
         const response = await movieClient.post("users/register", {
-            id: 0,
+            userId: 0,
             username: u.username,
             password: u.password, 
             email: u.email
@@ -139,4 +139,17 @@ export async function getAllUserLists(): Promise<any> //Promise<UserLists>
         return  { userListId, listName, listOwner };
     })
     return userListArr;
+}
+
+// Delete Movie from userlist by listid
+export async function deleteMovieFromUserList(movieId: number): Promise<any>
+{
+    try {
+        const response = await movieClient.delete(`/userlists/${movieId}`);
+        console.log("After the backend has been queryed");
+        // This should return how many movies were deleted
+        return response.data;
+    } catch (e) {
+        console.log(e.message);
+    }
 }
