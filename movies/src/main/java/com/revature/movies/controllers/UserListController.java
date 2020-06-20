@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import com.revature.movies.exceptions.ActorNotFoundException;
 import com.revature.movies.exceptions.UserListNotFoundException;
 import com.revature.movies.models.UserList; 
 import com.revature.movies.services.UserListServices; 

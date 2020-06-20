@@ -7,7 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository  <User, Integer> {
+public interface UserRepositoryInterface extends JpaRepository  <User, Integer> {
+	
+	
+	
+	
   @Query("select u from User u order by u.username")
  List<User> findAllSorted();
   
@@ -15,5 +19,9 @@ public interface UserRepository extends JpaRepository  <User, Integer> {
 
 	      nativeQuery = true)
   List<User> checkUsernamePassword(String username, String password);
+  
+
+  
+  
   
 }
