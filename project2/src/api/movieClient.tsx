@@ -47,6 +47,7 @@ export async function getUserListBy(userId: number): Promise<IPromiseGetUserList
 {
     // Probably going to need a try catch block here
     const response = await movieClient.get(`/userlists/users/${userId}`);
+    console.log(response.data[0]);
     const { listName, listOwner, movies, userListId } = response.data[0];
     console.log("After the backend has been queryed");
     let reduxMovies = movies.map((movie: any) => {
@@ -91,8 +92,8 @@ export async function login(un: string, pw: string): Promise<User>{
     try{
         console.log("In the backend client log in function");
         const response = await movieClient.post("users/login", {username: un, password: pw});
-        const {id, username, password, email} = response.data;
-        return new User(id, username, password, email)
+        const {userId, username, password, email} = response.data;
+        return new User(userId, username, password, email)
     }
     catch(e){
         if(e.response.status===401){
