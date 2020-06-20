@@ -46,13 +46,14 @@ export class UserListsComponent extends React.Component<IUserListsComponentProps
 
   async handleSubmit(e: any) {
     e.preventDefault();
-    if (this.state.value === 0) {
+    console.log(this.state.value);
+    if (this.state.value == 0) {
       let movies = await getAllMovies();
       this.props.moviesUpdateActionMapper(movies);
-      return;
+    } else {
+      let { movies } = await getUserListByListId(this.state.value);
+      this.props.moviesUpdateActionMapper(movies);
     }
-    let { movies } = await getUserListByListId(this.state.value);
-    this.props.moviesUpdateActionMapper(movies);
   }
 
 
@@ -61,7 +62,9 @@ export class UserListsComponent extends React.Component<IUserListsComponentProps
     return (
       <>
         <form onSubmit={this.handleSubmit}>
-          <select value={this.state.value} onChange={this.handleChange}>
+          <label>
+          {`Movie Lists: `}
+          <select name="listId" value={this.state.value} onChange={this.handleChange}>
             <option value={0}>All Movies</option>
             {userLists.map((userList:any) => 
               <option 
@@ -71,6 +74,7 @@ export class UserListsComponent extends React.Component<IUserListsComponentProps
                 {userList.listName}
               </option>)}
           </select>
+          </label>
           <input type="submit"/>
         </form>
       </>
