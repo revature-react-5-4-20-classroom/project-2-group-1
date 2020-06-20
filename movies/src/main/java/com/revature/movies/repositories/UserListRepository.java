@@ -1,12 +1,7 @@
 package com.revature.movies.repositories;
 
-
-import com.revature.movies.models.Movie;
-import com.revature.movies.models.User;
 import com.revature.movies.models.UserList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
