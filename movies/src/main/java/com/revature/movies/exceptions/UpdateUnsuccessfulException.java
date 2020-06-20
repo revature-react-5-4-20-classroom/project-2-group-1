@@ -2,14 +2,14 @@ package com.revature.movies.exceptions;
  
  
  
-public class UpdateSuccessfulException extends RuntimeException { 
+public class UpdateUnsuccessfulException extends RuntimeException { 
  
   /**
    * 
    */
   private static final long serialVersionUID = 1L;
  
-public UpdateSuccessfulException() { 
+public UpdateUnsuccessfulException() { 
  
 super(); 
  
@@ -19,7 +19,7 @@ super();
  
  
  
-public UpdateSuccessfulException(String message, Throwable cause, boolean enableSuppression, 
+public UpdateUnsuccessfulException(String message, Throwable cause, boolean enableSuppression, 
  
 boolean writableStackTrace) { 
  
@@ -31,7 +31,7 @@ super(message, cause, enableSuppression, writableStackTrace);
  
  
  
-public UpdateSuccessfulException(String message, Throwable cause) { 
+public UpdateUnsuccessfulException(String message, Throwable cause) { 
  
 super(message, cause); 
  
@@ -41,7 +41,7 @@ super(message, cause);
  
  
  
-public UpdateSuccessfulException(String message) { 
+public UpdateUnsuccessfulException(String message) { 
  
 super(message); 
  
@@ -51,7 +51,7 @@ super(message);
  
  
  
-public UpdateSuccessfulException(Throwable cause) { 
+public UpdateUnsuccessfulException(Throwable cause) { 
  
 super(cause); 
  

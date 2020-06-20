@@ -1,8 +1,10 @@
  package com.revature.movies.models;
 
+
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
+
+import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,12 +46,12 @@ public class Movie {
   @ManyToMany(cascade=CascadeType.ALL)
   @JoinTable(name="actorsjoin",schema = "project2",joinColumns=@JoinColumn(name="movieid"),inverseJoinColumns=@JoinColumn(name="actorid") )
   @JsonIgnoreProperties({"movies", "actorid"})
-  private List<Actor> actors=new ArrayList<Actor>(150);
+  private List<Actor> actors = new ArrayList<Actor>(150);
   
   @ManyToMany(cascade=CascadeType.ALL)
   @JoinTable(name="genresjoin",schema = "project2",joinColumns=@JoinColumn(name="movieid"),inverseJoinColumns=@JoinColumn(name="genreid") )
   @JsonIgnoreProperties({"movies", "genreid"})
-  private List<Genre> genres=new ArrayList<Genre>(150);
+  private List<Genre> genres = new ArrayList<Genre>(150);
   
   @Column(name="plot")
   private String plot;

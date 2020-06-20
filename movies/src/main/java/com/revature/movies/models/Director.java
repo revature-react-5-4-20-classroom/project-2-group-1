@@ -29,11 +29,15 @@ public class Director {
   
   
   
-
-
-public Director(int dirId, List<Movie> movielist, String directorName) {
+public Director(String name) {
 	super();
-	this.dirId = dirId;
+	this.dirId = 0;
+	this.directorName = name;
+}
+
+public Director(List<Movie> movielist, String directorName) {
+	super();
+	
 	this.movielist = movielist;
 	this.directorName = directorName;
 }
