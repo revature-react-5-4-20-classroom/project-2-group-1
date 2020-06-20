@@ -16,7 +16,7 @@ public interface MovieServicesInterface {
 	public Movie getByTitle(String title);
 	public List<Movie> getMoviesWithDirector();
 	public void addNewActors(List<Actor> actors);
-	 //public void addNewGenres(Genre genres);
+	public void addNewGenres(List<Genre> genres);
 	 //public void addNewDirector(Director director);
 	//public void addNewMovie(int movieId, String imdbId, String title, String rated, String released, String runtime, Director director, List<Actor> actors, List<Genre> genres, String plot, String poster, int imdbRating, double metascore, String trailer);
 }
