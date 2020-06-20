@@ -11,6 +11,7 @@ const movieClient = axios.create({
     withCredentials: true, 
 })
 
+//! Movie stuff
 export async function getAllMovies(): Promise<Movie[]>
 {
     const response = await movieClient.get("/movies");
@@ -35,6 +36,7 @@ export async function getMovieByTitle(movieTitle: string): Promise<Movie>
     return new Movie(movieId, imdbId, title, rated, released, runtime, reformattedDirector, plot, poster, imdbRating, metascore, trailer, reformattedGenres, reformattedActors);
 }
 
+//! Login stuff
 export async function login(un: string, pw: string): Promise<User>{
     try{
         console.log("In the backend client log in function");
@@ -71,7 +73,7 @@ export async function submitUser(u: User)
 }
 
 
-
+//! USER LIST STUFF
 
 
 interface IPromiseGetUserListBy {
@@ -85,7 +87,30 @@ export async function getUserListBy(userId: number): Promise<IPromiseGetUserList
 {
     // Probably going to need a try catch block here
     const response = await movieClient.get(`/userlists/users/${userId}`);
+    console.log(response.data[0]);
     const { listName, listOwner, movies, userListId } = response.data[0];
+    console.log("After the backend has been queryed");
+    let reduxMovies = movies.map((movie: any) => {
+        const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors} = movie;
+        let reformattedDirector = director.directorName;
+        let reformattedGenres = objectArrayToStringArray("genreName", genres);
+        let reformattedActors = objectArrayToStringArray("actorName", actors);
+        return new Movie(movieId, imdbId, title, rated, released, runtime, reformattedDirector, plot, poster, imdbRating, metascore, trailer, reformattedGenres, reformattedActors);
+    })
+    // console.log(reduxMovies);
+    return {
+        movies: reduxMovies,            
+        listName,
+        listOwner,
+        userListId
+    }
+}
+
+// Get the userList by listId
+export async function getUserListByListId(listId: number): Promise<any> 
+{
+    const response = await movieClient.get(`/userlists/${listId}`);
+    const { listName, listOwner, movies, userListId } = response.data;
     console.log("After the backend has been queryed");
     let reduxMovies = movies.map((movie: any) => {
         const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors} = movie;
@@ -114,26 +139,4 @@ export async function getAllUserLists(): Promise<any> //Promise<UserLists>
         return  { userListId, listName, listOwner };
     })
     return userListArr;
-}
-
-// Get the userList by listId
-export async function getUserListByListId(listId: number): Promise<any> 
-{
-    const response = await movieClient.get(`/userlists/${listId}`);
-    const { listName, listOwner, movies, userListId } = response.data;
-    console.log("After the backend has been queryed");
-    let reduxMovies = movies.map((movie: any) => {
-        const {movieId, imdbId, title, rated, released, runtime, director, plot, poster, imdbRating, metascore, trailer, genres, actors} = movie;
-        let reformattedDirector = director.directorName;
-        let reformattedGenres = objectArrayToStringArray("genreName", genres);
-        let reformattedActors = objectArrayToStringArray("actorName", actors);
-        return new Movie(movieId, imdbId, title, rated, released, runtime, reformattedDirector, plot, poster, imdbRating, metascore, trailer, reformattedGenres, reformattedActors);
-    })
-    // console.log(reduxMovies);
-    return {
-        movies: reduxMovies,            
-        listName,
-        listOwner,
-        userListId
-    }
 }

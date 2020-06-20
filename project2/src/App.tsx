@@ -6,8 +6,8 @@ import { LandingPage } from "./pages/LandingPage";
 import { LoginPage } from "./pages/LoginPage";
 import { MovieFormPage } from "./pages/MovieFormPage";
 import { MoviePage } from "./pages/MoviePage";
-import { MoviesListFormPage } from "./pages/MoviesListFormPage";
 import { MoviesListPage } from "./pages/MoviesListPage";
+import { MoviesListFormPage } from "./pages/MoviesListFormPage";
 import {NavBar} from "./components/NavBar"
 import { Nav } from "reactstrap";
 import {ThemeProvider} from 'styled-components';
@@ -20,7 +20,7 @@ import { IState } from "./redux/reducers";
 import { User } from "./models/Users";
 
 //! For Redux
-const mapStateToPropsMovies = (state: IState) => {
+const mapStateToPropsMovies = (state: IState, ) => {
   const { movies } = state.moviesStore;
   return {
     movies,
@@ -31,6 +31,7 @@ const mapDispatchToProps = {
 }
 
 const MoviesListPageReduxContainer = connect(mapStateToPropsMovies, mapDispatchToProps)(MoviesListPage);
+const MoviesListFormPageReduxContainer = connect(mapStateToPropsMovies, mapDispatchToProps)(MoviesListFormPage);
 //! End of Redux
 
 export class App extends React.Component<any, any> {
@@ -110,8 +111,8 @@ export class App extends React.Component<any, any> {
                   />}
                 />
 
-                <Route path="/movies-form" render={(props) => 
-                  <MoviesListFormPage
+                <Route path="/movies/list-form" render={(props) => 
+                  <MoviesListFormPageReduxContainer loggedInUser={this.state.loggedInUser !== null ? this.state.loggedInUser : new User(1, "aaron", "a1", "aadams517@gmail.com")}
                     {...props}
                   />}
                 />

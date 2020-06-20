@@ -1,13 +1,13 @@
 export class User
 {
-    id: number
+    userId: number
     username: string
     password: string
     email: string
 
-    constructor(id: number, username: string, password: string, email: string)
+    constructor(userId: number, username: string, password: string, email: string)
     {
-        this.id = id;
+        this.userId = userId;
         this.username = username;
         this.password = password; 
         this. email = email;
