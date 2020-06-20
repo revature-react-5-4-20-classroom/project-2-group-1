@@ -10,4 +10,6 @@ public interface UserListServicesInterface {
  
  public List<UserList> findByUserId(Integer id);
  
+ public UserList findByListId(Integer id);
+ 
 }

@@ -8,39 +8,25 @@ import { Movie } from "../models/Movie"
 
 // Our tictactoe state follows the state from our Game Component
 export interface IMoviesState {
-  //TODO: Do we want the focus movie?
-  // movie: Movie;
-  // movieId: number;
   movies: Movie[];
-  userListId: number;
+  userLists: any[];
 }
 
 // Set up an initial state
 const initialMovieState : IMoviesState = {
-  //TODO: Do we want the focus movie?
-  // movie: new Movie(1, 'tt0068646', 'The Godfather', 'R', '24 Mar 1972', '175 min', 'Fill in', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg', 9.2, 100, 'https://www.youtube.com/embed/sY1S34973zA', ['Crime', 'Drama'], ['Marlon Brando', 'Al Pacino', 'James Caan', 'Richard S. Castellano']),
-  // movieId: 1,
   movies: [new Movie(1, 'tt0068646', 'The Godfather', 'R', '24 Mar 1972', '175 min', 'Fill in', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg', 9.2, 100, 'https://www.youtube.com/embed/sY1S34973zA', ['Crime', 'Drama'], ['Marlon Brando', 'Al Pacino', 'James Caan', 'Richard S. Castellano'])],
-  userListId: 1,
+  userLists: [],
 }
 
 export const moviesReducer = (state: IMoviesState=initialMovieState, action: AnyAction) => {
   console.log("inside the movies reducer")
   switch(action.type) {
-    //TODO: Do we want the focus movie?
-    // case moviesTypes.MOVIE_GET_CLICK: {
-    //   const { movieId } = action.payload;
-    //   return {
-    //     ...state,
-    //     movieId
-    //   }
-    // }
-    case moviesTypes.MOVIES_GET_CLICK: {
-      const { userListId } = action.payload;
-      console.log(userListId)
+    case moviesTypes.GET_USER_LISTS: {
+      const { userLists } = action.payload;
+      console.log(userLists)
       return {
         ...state,
-        userListId
+        userLists
       }
     }
     case moviesTypes.UPDATE_MOVIES: {

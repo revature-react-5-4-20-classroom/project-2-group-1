@@ -31,6 +31,7 @@ public class UserList {
   @ManyToOne(fetch = FetchType.EAGER)
   @JsonIgnoreProperties({"userLists", "password", "email"}) //"listowner", "ListOwner", "listOwner"
     private User listOwner;
+
   //@ManyToMany
   //@JoinTable(name = "listjoin", joinColumns= @JoinColumn(name = "movieid"),
    //inverseJoinColumns = @JoinColumn(name = "userlistid"))
@@ -38,6 +39,7 @@ public class UserList {
   @JoinTable(name="listjoin",schema = "project2",joinColumns=@JoinColumn(name="userlistid"),inverseJoinColumns=@JoinColumn(name="movieid") )
 //  @JsonIgnoreProperties({"movies"})
   private List<Movie> movies=new ArrayList<Movie>(150);
+
   public UserList() {
     super();
   }

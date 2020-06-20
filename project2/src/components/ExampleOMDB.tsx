@@ -39,6 +39,12 @@ export class ExampleOMDB extends React.Component<any, any> {
       title: '',
     }
   } 
+
+  // https://www.youtube.com/embed/OXrcDonY-B8
+  // https://www.youtube.com/watch?v=OXrcDonY-B8
+  // userinput.split('watch?v=')
+  // userinput[0] + "embed/" + userinput[1];
+  // https://www.youtube.com/embed/sY1S34973zA
   
   // NOTE: You need to add a .env file to the root of react application (same folder as package.json)
   // Should have REACT_APP_OMDB_API_KEY="my-api-key" where "my-api-key" is the api key I can send over slack

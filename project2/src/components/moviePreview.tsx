@@ -13,9 +13,8 @@ export class MoviePreview extends React.Component<IMoviePreivewProps>
     render()
     {
         return(
-            <Container>
                 <Row>
-                    <Col >
+                    <Col className="myColumn moviePadding">
                     <h1>{this.props.movie.title}</h1>
                     <h2>Director: {this.props.movie.director}</h2>
                     <h2>Year of Release: {this.props.movie.released}</h2>
@@ -26,7 +25,6 @@ export class MoviePreview extends React.Component<IMoviePreivewProps>
                     <img src={this.props.movie.poster} />
                     </Col>
                 </Row>
-            </Container>
         )
     }
 }

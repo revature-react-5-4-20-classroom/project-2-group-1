@@ -14,9 +14,24 @@ import {ThemeProvider} from 'styled-components';
 import { lightTheme, darkTheme} from "./styling/theme"
 import {GlobalStyles} from "./styling/global"
 import { toggle } from "./components/toggleComponent";
+import { getAllUserLists } from "./api/movieClient";
+import { userListsActionMapper, moviesUpdateActionMapper } from "./redux/action-mappers";
+import { IState } from "./redux/reducers";
+import { User } from "./models/Users";
 
+//! For Redux
+const mapStateToPropsMovies = (state: IState) => {
+  const { movies } = state.moviesStore;
+  return {
+    movies,
+  }
+}
+const mapDispatchToProps = {
+  moviesUpdateActionMapper
+}
 
-
+const MoviesListPageReduxContainer = connect(mapStateToPropsMovies, mapDispatchToProps)(MoviesListPage);
+//! End of Redux
 
 export class App extends React.Component<any, any> {
 
@@ -29,6 +44,18 @@ export class App extends React.Component<any, any> {
       theme: 'light'
     }
   }
+
+  updateLoggedInuser = (user: User) =>{
+    this.setState({
+      loggedInUser: user
+    });
+  };
+
+  logoutUser =()=>{
+    this.setState({
+      loggedInUser: null, 
+    });
+  };
 
   toggleTheme = () =>{
     if(this.state.theme === 'light')
@@ -53,13 +80,14 @@ export class App extends React.Component<any, any> {
           <Provider store={store}>
             <Router>
               <NavBar 
+                logoutUser={this.logoutUser}
                 loggedInUser = {this.state.loggedInUser}
                 toggleTheme={this.toggleTheme}
               />
 
               <Switch>
                 <Route path="/login" render={(props) => 
-                  <LoginPage
+                  <LoginPage loggedInUser={this.state.loggedInUser} updateUser={this.updateLoggedInuser}
                     {...props}
                   />}
                 />
@@ -71,12 +99,12 @@ export class App extends React.Component<any, any> {
                 />
                  {/* We will use list id from our db */}
                  <Route path="/movies/list" render={(props) => 
-                  <MoviesListPage
+                  <MoviesListPageReduxContainer
                     {...props}
                   />}
                 />
                 {/* We will use title from our db */}
-                <Route path="/movie/:title" render={(props) => 
+                <Route path="/movies/title/:title" render={(props) => 
                   <MoviePage 
                     {...props}
                   />}

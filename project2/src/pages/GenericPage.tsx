@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import { getUserListBy } from '../api/movieClient';
+import { Movie } from '../models/Movie';
 
 interface IGenericPageProps {
-  moviesClickActionMapper: (userListId: number) => any;
+  moviesUpdateActionMapper: (movies: Movie[]) => any;
 }
 interface IGenericPageState {
   test: string;
@@ -17,11 +18,15 @@ export class GenericPage extends React.Component<IGenericPageProps, IGenericPage
     }
   }
 
-  getUserList = (e: any) => {
+  getUserList = async (e: any) => {
     console.log(e.currentTarget);
     console.log(e.currentTarget.value);
-    getUserListBy(1);
-    this.props.moviesClickActionMapper(3);
+    // Serach for user list where user id === 2
+    let { movies, listName, listOwner, userListId } = await getUserListBy(1);
+    // Updates the userListId to 3
+    console.log(listName);
+    console.log(listOwner);
+    this.props.moviesUpdateActionMapper(movies);
   }
 
   render() {

@@ -8,6 +8,7 @@ import { User } from '../models/Users';
 
 interface INavBarProps
 {
+    logoutUser: () =>void;
     loggedInUser: User | null,
     toggleTheme: ()=> void
 }
@@ -28,7 +29,7 @@ export class NavBar extends React.Component<INavBarProps, any>
                     <NavItem>
                         <NavLink to="/movies/list" className="nav-link" activeClassName="active">Movies</NavLink>
                     </NavItem>
-                    <NavItem tag={()=>{return <Button to="/home"  hidden={!this.props.loggedInUser} /*onClick={this.props.logoutUser}*/ color="secondary" outline>Logout</Button>}} />
+                    <NavItem tag={()=>{return <Button to="/home"  hidden={!this.props.loggedInUser} onClick={this.props.logoutUser} color="secondary" outline>Logout</Button>}} />
                     <button onClick={()=>this.props.toggleTheme()}>Toggle Theme</button>
                 </Nav>
                 <Form inline className="mr-sm-2">

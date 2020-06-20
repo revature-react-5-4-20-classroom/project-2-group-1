@@ -1,0 +1,10 @@
+.myColumn.myPadding {
+  margin: 10px 0px;
+}
+.myColumn.moviePadding {
+  margin-left: 10px; 
+}
+
+.center {
+  text-align: center;
+}

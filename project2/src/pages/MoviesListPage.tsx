@@ -1,72 +1,50 @@
 import * as React from 'react';
 import { Movie } from '../models/Movie';
-import { getAllMovies } from '../api/movieClient';
+import { getAllMovies, getAllUserLists } from '../api/movieClient';
 import { MoviePreview } from '../components/moviePreview';
-import { Table, Container } from 'reactstrap';
+import { Table, Container, Row, Col, Jumbotron, Button } from 'reactstrap';
 import { ExampleActorsBackend } from '../components/ExampleActorsBackend';
 import { IState } from '../redux/reducers';
-import { moviesUpdateActionMapper, moviesClickActionMapper } from "../redux/action-mappers";
+import { moviesUpdateActionMapper, userListsActionMapper } from "../redux/action-mappers";
 import { GenericPage } from './GenericPage';
 import { connect } from 'react-redux';
+import { UserListsComponent } from '../components/UserListsComponent';
 
 //! For Redux
-const mapStateToProps = (state: IState) => {
+const mapStateToPropsUserLists = (state: IState) => {
+  const { userLists } = state.moviesStore;
   return {
-    ...state.moviesStore,
-    // ...state.player
+    userLists,
   }
 }
-
 const mapDispatchToProps = {
-  moviesClickActionMapper,
-  moviesUpdateActionMapper
+  moviesUpdateActionMapper,
+  userListsActionMapper
 }
-// Connect is a higher order component. This creates a container that has access to the global state
-// We can create other containers depending on the page we are one
-const GenericReduxContainer = connect(mapStateToProps, mapDispatchToProps)(GenericPage);
+
+const UserListsComponentReduxContainer = connect(mapStateToPropsUserLists, mapDispatchToProps)(UserListsComponent);
 //! End of Redux
 
-
-
 export class MoviesListPage extends React.Component<any, any> {
-  constructor(props: any)
-  {
-    super(props)
-    this.state = {
-      movies: [],
-      moviesLoaded: false,
-
-    }
-  }
-
-  async componentDidMount()
-  {
-    try
-    {
-      this.setState({
-        movies: await getAllMovies(),
-        moviesLoaded: true
-      })
-    }
-    catch(e)
-    {
-      throw(e.message);
-    }
-  }
 
   render() {
+    const movies = this.props.movies;
     return (
-      <Container>
-        <Table striped md={{size: 6}}>
-          <tbody>
-            {this.state.movies.map((movieObj: Movie)=>{
+      <Container fluid>
+        <Jumbotron>
+          {/* This will take some work to make it a dynamic title so come back later if you have time */}
+          <h1 className="display-3 center">{`Movies`}</h1>
+        </Jumbotron>
+        {/* Make this a sticky component */}
+        <UserListsComponentReduxContainer></UserListsComponentReduxContainer>
+        <Row>
+            {movies.map((movieObj: Movie)=>{
                 //return <img key={movieObj.movieId} src={movieObj.poster}/>
-                return <tr><MoviePreview movie={movieObj}/></tr>
+                return <Col className="myColumn myPadding" key={movieObj.movieId} xl={6}><MoviePreview movie={movieObj}/></Col>
             })}
-          </tbody>
-        </Table>
-        <GenericReduxContainer></GenericReduxContainer>
+        </Row>
       </Container>
     )
   }
 }
+
