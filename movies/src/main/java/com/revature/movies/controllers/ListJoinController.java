@@ -17,17 +17,15 @@ public class ListJoinController {
   ListJoinService listJoinService;
   
   
-  @PostMapping(path = "/userlists/{userListId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public int addMovieToList(@RequestBody RequestModel movieId, @PathVariable int userListId) {
-    System.out.println(movieId.getMovieId());
-    System.out.println(movieId);
-    return listJoinService.addMovieToList(movieId.getMovieId(), userListId);
+  @PostMapping(path = "/userlists/movie/{movieId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+  public int addMovieToList(@RequestBody RequestModel userListId, @PathVariable int movieId) {
+    return listJoinService.addMovieToList(movieId, userListId.getUserListId());
   }
 
 
-  @DeleteMapping(path = "/userlists/{userListId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public int removeMovieFromList(@RequestBody RequestModel movieId, @PathVariable int userListId) {
-    return listJoinService.removeMovieFromList(movieId.getMovieId(), userListId);
+  @DeleteMapping(path = "/userlists/movie/{movieId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+  public int removeMovieFromList(@RequestBody RequestModel userListId, @PathVariable int movieId) {
+    return listJoinService.removeMovieFromList(movieId, userListId.getUserListId());
   }
   
 }
