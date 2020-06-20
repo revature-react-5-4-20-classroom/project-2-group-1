@@ -7,5 +7,5 @@ public interface UserServicesInterface {
 
  public List<User> getAll();
  public User checkCredentials(String username, String password);
- 
+ public void registerNewUser(User newUser); 
 }
