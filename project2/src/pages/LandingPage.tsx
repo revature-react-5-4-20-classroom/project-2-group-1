@@ -1,13 +1,58 @@
 import React from 'react';
+import { User } from '../models/Users';
+import {Carousel} from "react-responsive-carousel"
+import CarouselComponent from "../components/carouselComponent"
+import { getMovieByTitle } from '../api/movieClient';
+import { MoviePreview } from '../components/moviePreview';
+import { Movie } from '../models/Movie';
+import { Container, Row } from 'reactstrap';
 
-export class LandingPage extends React.Component<any, any> {
+interface ILandingPageProps
+{
+  loggedInUser: User | null
+}
+
+
+export class LandingPage extends React.Component<ILandingPageProps, any> {
+
+  constructor(props: any)
+  {
+    super(props);
+    this.state = 
+    {
+      movieOne: [],
+      movieTwo: [],
+      movieThree: []
+    }
+
+  }
+  async componentDidMount()
+  {
+    try
+    {
+      this.setState({
+        movieOne: await getMovieByTitle("casablanca"),
+        movieTwo: await getMovieByTitle("the godfather"),
+        movieThree: await getMovieByTitle("citizen kane")
+      })
+    }
+    catch(e)
+    {
+      throw(e.message)
+    }
+  }
+
   render() {
     return (
-      <div className="page" id="landingPage">
-        <h1>Landing Page</h1>
-        <p>This page is where the user is directed upon logging in or they they go to if they are a guest.</p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/6JnN1DmbqoU"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-      </div>
+      <Container >
+        <Row md="auto" className="justify-content-center">
+          <div className="justifiy-content-center" id="landingPage">
+            <h3>Welcome to FavFilms {this.props.loggedInUser ? this.props.loggedInUser.username : "guest"}! </h3>
+            <h3>Here are some of the movies you can find out about on our site!</h3>
+            <CarouselComponent movieOne={this.state.movieOne} movieTwo={this.state.movieTwo} movieThree={this.state.movieThree}/>
+          </div>
+        </Row>
+      </Container>
     )
   }
 }

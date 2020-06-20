@@ -36,7 +36,7 @@ export class LoginPage extends React.Component<any, any> {
         <Container>
           <Button onClick={this.changeForm}>{this.state.newUser? (<p>Register</p>):<p>login</p>}</Button>
           {this.state.newUser ? 
-          (<LoginComponent loggedInUser={this.props.loggedInUser} updateUser={this.props.updateUser}/>) : <UserForm/>}
+          (<LoginComponent history ={this.props.history} loggedInUser={this.props.loggedInUser} updateUser={this.props.updateUser}/>) : <UserForm/>}
         </Container>
       </div>
     )

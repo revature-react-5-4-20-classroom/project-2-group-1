@@ -41,7 +41,7 @@ export class MoviePreview extends React.Component<IMoviePreivewProps>
                     <Row>
                         <Col></Col>
                         <Col>
-                            <Button color="danger" className="centerElement myButton" value={this.props.movie.movieId} onClick={this.props.onClick}>Remove From List</Button>
+                            <Button color="danger" className="centerElement myButton" value={this.props.movie.movieId} onClick={this.props.onDelete}>Remove From List</Button>
                         </Col>
                     </Row>
                     : ""
