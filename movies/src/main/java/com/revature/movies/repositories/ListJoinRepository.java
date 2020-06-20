@@ -13,11 +13,11 @@ public interface ListJoinRepository extends JpaRepository  <ListJoin, Integer> {
   @Transactional
   @Modifying
   @Query(value="INSERT INTO project2.listjoin(userlistid, movieid) VALUES (:userListId, :movieId);", nativeQuery=true)
-  int addMovieToList(int userListId, Integer movieId);
+  int addMovieToList(int userListId, int movieId);
   
   @Transactional
   @Modifying
   @Query("delete ListJoin lj where lj.userListId=:userListId and lj.movieId=:movieId")
-  int removeMovieFromList(int userListId, Integer movieId);
+  int removeMovieFromList(int userListId, int movieId);
 
 }

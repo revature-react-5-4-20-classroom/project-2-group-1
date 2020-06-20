@@ -11,12 +11,12 @@ public class ListJoinService implements ListJoinServiceInterface{
   ListJoinRepository listJoinRepository;
   
   @Override
-  public int addMovieToList(Integer movieId, int userListId) {
+  public int addMovieToList(int movieId, int userListId) {
     return listJoinRepository.addMovieToList(userListId, movieId);
   }
 
   @Override
-  public int removeMovieFromList(Integer movieId, int userListId) {
+  public int removeMovieFromList(int movieId, int userListId) {
     return listJoinRepository.removeMovieFromList(userListId, movieId);
   }
   
