@@ -4,10 +4,11 @@ import {basename} from "path"
 import { objectArrayToStringArray } from '../utils';
 import { User } from '../models/Users';
 
-
+// Production: "http://ec2-18-223-3-0.us-east-2.compute.amazonaws.com:7773/"
+// Testing: "http://localhost:8081/"
 
 const movieClient = axios.create({
-    baseURL: "http://ec2-18-223-3-0.us-east-2.compute.amazonaws.com:7773/", 
+    baseURL: "http://localhost:8081/", 
     withCredentials: true, 
 })
 
@@ -142,14 +143,29 @@ export async function getAllUserLists(): Promise<any> //Promise<UserLists>
 }
 
 // Delete Movie from userlist by listid
-export async function deleteMovieFromUserList(movieId: number): Promise<any>
+export async function deleteMovieFromUserList(movieId: number, userListId: number): Promise<any>
 {
     try {
-        const response = await movieClient.delete(`/userlists/${movieId}`);
+        const response = await movieClient.delete(`/userlists/${userListId}`, {data: {movieId: movieId}});
         console.log("After the backend has been queryed");
         // This should return how many movies were deleted
         return response.data;
     } catch (e) {
         console.log(e.message);
+        throw e;
+    }
+}
+
+// Add Movie to userlist by listid
+export async function addMovieToUserList(movieId: number, userListId: number): Promise<any>
+{
+    try {
+        const response = await movieClient.post(`/userlists/${userListId}`, {movieId: movieId});
+        console.log("After the backend has been queryed");
+        // This should return how many movies were added
+        return response.data;
+    } catch (e) {
+        console.log(e.message);
+        throw e;
     }
 }
