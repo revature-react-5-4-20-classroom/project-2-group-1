@@ -1,22 +1,31 @@
 import React from "react";
 import { Table, Container, Row, Col, Button } from "reactstrap"
 import { Movie } from "../models/Movie";
+import { useHistory } from "react-router";
 
 interface IMoviePreivewProps
 {
     movie: Movie;
     deleteButton?: boolean;
     onClick?: (e: any) => void;
+    onDelete?: (e: any) =>void;
+
 }
 
 export class MoviePreview extends React.Component<IMoviePreivewProps>
 {
+
+
+    // routeChange=()=>{
+    //     let path =`movies/title/${this.props.movie.title}`
+    //     this.props.history.push(path)
+    // }
     
     render()
     {
         return(
             <>
-                <Row>
+                <Row onClick={this.props.onClick}>
                     <Col className="myColumn moviePadding">
                     <h1>{this.props.movie.title}</h1>
                     <h2>Director: {this.props.movie.director}</h2>

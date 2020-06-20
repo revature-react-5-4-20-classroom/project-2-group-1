@@ -11,6 +11,7 @@ interface IMoviesListFormPageProps {
   moviesUpdateActionMapper: (movies: Movie[]) => any;
   movies: Movie[];
   loggedInUser: User;
+  history: any
 }
 
 interface IMoviesListFormPageState {
@@ -136,7 +137,8 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
                     <MoviePreview 
                       deleteButton={true}
                       movie={movieObj} 
-                      onClick={this.removeMovieFromList}
+                      onDelete={this.removeMovieFromList}
+                      onClick={()=>{this.props.history.push(`title/${movieObj.title}`)}}
                     />
                   </Col>
                 )

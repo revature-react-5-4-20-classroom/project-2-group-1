@@ -8,7 +8,7 @@ import com.revature.movies.models.Movie;
 
 
 @Repository
-public interface MovieRepository extends JpaRepository  <Movie, Integer>  {
+public interface MovieRepositoryInterface extends JpaRepository  <Movie, Integer>  {
 	@Query("select m from Movie m order by m.movieId")
 	List<Movie> findAllSorted(); 
 	
