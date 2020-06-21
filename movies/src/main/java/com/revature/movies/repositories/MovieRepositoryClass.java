@@ -16,7 +16,7 @@ public class MovieRepositoryClass {
 	@PersistenceContext
 	public EntityManager entityManager;
 	
-	@Transactional
+	/*@Transactional
 	public void addNewActors(List<Actor> actor)  {
 		System.out.println(actor.toString());
 		
@@ -42,7 +42,20 @@ public class MovieRepositoryClass {
 			   System.out.println(result);
 		}
 			
-	}
+	}*/
+	
+	@Transactional
+	public void addNewDirector(Director director)  {
+		System.out.println(director.toString());
+		
+		
+			  int result = entityManager.createNativeQuery("INSERT INTO project2.directors (directorid, directorname) VALUES (DEFAULT, ?)")
+			      .setParameter(1, director.getDirectorName())
+			      .executeUpdate();
+			   System.out.println(result);
+		}
+			
+	
 	
 	//@Transactional
 	/*public void addNewMovie(int movieId, String imdbId, String title, String rated, String released, String runtime, Director director, List<Actor> actors, List<Genre> genres, String plot, String poster, int imdbRating, double metascore, String trailer) {

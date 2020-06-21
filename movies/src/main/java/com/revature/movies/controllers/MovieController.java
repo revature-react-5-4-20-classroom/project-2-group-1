@@ -56,8 +56,8 @@ public class MovieController {
 		 System.out.println(movie.toString());
 		 
 		 //movieServices.addNewActors(movie.getActors());
-		 movieServices.addNewGenres(movie.getGenres());
-		 //movieService.addNewDirector(movie.getDirector());
+		 //movieServices.addNewGenres(movie.getGenres());
+		 movieServices.addNewDirector(movie.getDirector());
 	   //movieServices.addNewMovie(movie.getMovieId(), movie.getImdbId(), movie.getTitle(), movie.getRated(), movie.getReleased(), movie.getRuntime(), movie.getDirector(), movie.getActors(), movie.getGenres(), movie.getPlot(), movie.getPoster(), movie.getImdbRating(), movie.getMetascore(), movie.getTrailer());
 	  
 	  
