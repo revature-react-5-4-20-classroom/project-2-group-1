@@ -245,7 +245,7 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
               <Label for="listName">Your List Name:</Label>
               <Input type="text" name="listName" id="listName" onChange={this.setInputStates} value={this.state.listName} placeholder="glorious list names only" />
             </FormGroup>
-            <Button>THE BUTTON</Button>
+            <Button color="success">THE BUTTON</Button>
           </Form>
         </>
         }
