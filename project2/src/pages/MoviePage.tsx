@@ -40,42 +40,54 @@ export class MoviePage extends React.Component<any, any> {
   render() {
     return (
       <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', }} className="page" id="moviePage">
-        <Container  sm={{size: 12}}>
-          <Row className="justify-content-center">
-            <Col md={{ size: 6, offset: 2 }}>
+        <Container  >
+          <Row className="justify-content-center" md="auto">
+            <Col>
             <h1>{this.state.movies.title}</h1><br />
             </Col>
           </Row>
-          <Row>
-            <Col xs="4" md={{offset: 1}}>
+          <Row className="justify-content-center" md="auto">
+            <Col sm="auto">
             <img src={this.state.movies.poster}/><br />
             </Col>
-            <Col xs="4">
+            <Col>
             <h3>Plot: {this.state.movies.plot}</h3><br />
             <h3>Director: {this.state.movies.director}</h3>
-            <h3>Release date: {this.state.movies.released}</h3>
-            <h3>Runtime: {this.state.movies.runtime}</h3>
             </Col>
 
           </Row>
-          <Col md={{ size: 6, offset: 1}}>
+          <Row>
+          <Col>
+            <h3>Trailer in HD!</h3>
             <iframe width="560" height="315" src={this.state.movies.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ></iframe>
           </Col>
-          <Row>
-            <Col md={{ size: 6, offset: 3 }}>
-            <h1>Ratings</h1><br />
-            </Col>
+          <Col>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+            <h3>Release date: {this.state.movies.released}</h3>
+            <h3>Runtime: {this.state.movies.runtime}</h3>
+          </Col>
           </Row>
-          <Row>
-            <Col>
-              <h3>IMDB: {this.state.movies.imdbRating}</h3>
-              <h3>Metacritic: {this.state.movies.imdbRating}</h3>
+          <Row className="justify-content-center">
+            <Col >
+            <h3>Ratings</h3>
+            <h3>IMDB: {this.state.movies.imdbRating}</h3>
+            <h3>Metacritic: {this.state.movies.imdbRating}</h3>
             </Col>
-            
-          </Row>
-          <Row>
             <Col>
-                {/* {this.state.movies.actors[0].actorName} */}
+                <h3>Actors:</h3>
+                {this.state.movies.actors && this.state.movies.actors.map((actor: string)=>{
+                  return (<h3>{actor}</h3>)
+                })}
+            </Col>
+            <Col>
+                <h3>Genres:</h3>
+                {this.state.movies.genres && this.state.movies.genres.map((genre: string)=>{
+                  return (<h3>{genre}</h3>)
+                })}
             </Col>
           </Row>
         </Container>

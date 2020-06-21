@@ -81,7 +81,7 @@ export class UserForm extends React.Component<any,any>
                             required
                         />
                     </FormGroup>
-                    <Button>Register</Button>
+                    <Button>Register</Button> <Button onClick={this.props.changeForm}>Already have an account?</Button>
                 </Form>
             </Container>
                 

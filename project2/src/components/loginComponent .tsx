@@ -87,7 +87,7 @@ export class LoginComponent extends React.Component<any, any> {
                   required
                 />
               </FormGroup>
-              <Button>Login</Button>
+              <Button>Login</Button> <Button onClick={this.props.changeForm}>Are you a new user?</Button>
             </Form>
           </Col>
         </Row>

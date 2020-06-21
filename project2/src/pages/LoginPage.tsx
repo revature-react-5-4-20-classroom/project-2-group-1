@@ -33,10 +33,10 @@ export class LoginPage extends React.Component<any, any> {
   render() {
     return (
       <div className="page" id="loginPage">
-        <Container>
-          <Button onClick={this.changeForm}>{this.state.newUser? (<p>Register</p>):<p>login</p>}</Button>
+        <Container className="justify-content-center">
           {this.state.newUser ? 
-          (<LoginComponent history ={this.props.history} loggedInUser={this.props.loggedInUser} updateUser={this.props.updateUser}/>) : <UserForm/>}
+          (<LoginComponent changeForm={this.changeForm} history ={this.props.history} loggedInUser={this.props.loggedInUser} updateUser={this.props.updateUser}/>) : <UserForm changeForm={this.changeForm}/>}
+          {/* <Button onClick={this.changeForm}>{this.state.newUser? (<p>Register</p>):<p>login</p>}</Button> */}
         </Container>
       </div>
     )
