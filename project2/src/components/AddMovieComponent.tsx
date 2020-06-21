@@ -100,7 +100,7 @@ export class AddMovieComponent extends React.Component<IAddMovieComponentProps, 
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} style={{marginLeft: "10px"}}>
           <label>
           {`Available Movies: `}
           <select name="listId" value={this.state.value} onChange={this.handleChange}>

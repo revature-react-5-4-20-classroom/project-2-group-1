@@ -31,3 +31,8 @@ img.ourPoster {
   min-width: 250px;
   border: 2px solid black;
 }
+
+#userListMovieH1:hover {
+  cursor: pointer;
+  
+}

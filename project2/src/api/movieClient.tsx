@@ -8,7 +8,7 @@ import { UserList } from '../models/UserList';
 // Testing: "http://localhost:8081/"
 
 const movieClient = axios.create({
-    baseURL: "http://ec2-18-223-3-0.us-east-2.compute.amazonaws.com:7773/", 
+    baseURL: "http://localhost:8081/", 
     withCredentials: true, 
 })
 
@@ -193,6 +193,19 @@ export async function deleteUserList(userListId: number): Promise<number>
         const response = await movieClient.delete(`/userlists/userlistid/${userListId}`)
         console.log("After the backend has been queryed");
         // Number of lists deleted
+        return response.data;
+    } catch (e) {
+        console.log(e.message);
+        throw e;
+    }
+}
+
+export async function patchUserListName(listName: string, userListId: number): Promise<any>
+{
+    let userList = new UserList(userListId, listName, {userId: 0, username: "notused"}, [])
+    try {
+        const response = await movieClient.patch(`/userlists/userlistid/${userListId}`, userList)
+        console.log("after the backend has been queryed");
         return response.data;
     } catch (e) {
         console.log(e.message);
