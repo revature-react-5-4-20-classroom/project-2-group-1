@@ -6,7 +6,6 @@ import { Table, Container, Row, Col, Jumbotron, Button } from 'reactstrap';
 import { ExampleActorsBackend } from '../components/ExampleActorsBackend';
 import { IState } from '../redux/reducers';
 import { moviesUpdateActionMapper, userListsActionMapper } from "../redux/action-mappers";
-import { GenericPage } from './GenericPage';
 import { connect } from 'react-redux';
 import { UserListsComponent } from '../components/UserListsComponent';
 

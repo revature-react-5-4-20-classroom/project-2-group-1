@@ -112,7 +112,7 @@ export class App extends React.Component<any, any> {
                 />
 
                 <Route path="/movies/list-form" render={(props) => 
-                  <MoviesListFormPageReduxContainer loggedInUser={this.state.loggedInUser !== null ? this.state.loggedInUser : new User(1, "aaron", "a1", "aadams517@gmail.com")}
+                  <MoviesListFormPageReduxContainer loggedInUser={this.state.loggedInUser}
                     {...props}
                   />}
                 />

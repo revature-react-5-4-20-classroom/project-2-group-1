@@ -60,6 +60,7 @@ public class UserListController {
   @PostMapping(path = "/userlists/users/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
   public UserList addUserList(@RequestBody UserList userList, @PathVariable Integer userId) {
     try {
+      System.out.println(userList.toString());
       return userListServices.addUserList(userList, userId);
     } catch (UserNotFoundException e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find user with id " + userId + ", so couldn't add list.", e);
