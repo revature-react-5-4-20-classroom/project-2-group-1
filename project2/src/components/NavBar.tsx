@@ -103,10 +103,9 @@ export class NavBar extends React.Component<INavBarProps, any>
                             value={this.state.title}
                         />
                         {/* <Button>Blah blah</Button> */}
-                        <button><Link to={`/movies/title/${this.state.title}`}>Search</Link></button>
                     </FormGroup>
+                    <button><Link to={`/movies/title/${this.state.title}`}>Search</Link></button>
                 </Form>
-
             </Navbar>
         </div>
         )
