@@ -2,7 +2,7 @@ import React from 'react';
 import { Movie } from '../models/Movie';
 import { User } from '../models/Users';
 import { Form, FormGroup, Label, Col, Input, Button, Toast, ToastHeader, ToastBody, Jumbotron, Row } from 'reactstrap';
-import { getUserListBy, deleteMovieFromUserList, addMovieToUserList, getAllMovies } from '../api/movieClient';
+import { getUserListBy, deleteMovieFromUserList, addMovieToUserList, getAllMovies, createUserList } from '../api/movieClient';
 import { MoviePreview } from '../components/moviePreview';
 import { DBToast } from '../components/DBToast';
 import { UserListsComponent } from '../components/UserListsComponent';
@@ -34,11 +34,13 @@ interface IMoviesListFormPageProps {
 }
 
 interface IMoviesListFormPageState {
+  [k: string]: any;
   allMovies: Movie[];
   listName: string;
   userListId: number;
   numberMoviesDeleted: number;
   numberMoviesAdded: number;
+  hasList: boolean;
 }
 
 export class MoviesListFormPage extends React.Component <IMoviesListFormPageProps, IMoviesListFormPageState> {
@@ -50,19 +52,31 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
       userListId: 0,
       numberMoviesAdded: 0,
       numberMoviesDeleted: 0,
+      hasList: true,
     }
   }
 
   async componentDidMount() {
     try 
     {
-      let { movies, listName, userListId } = await getUserListBy(this.props.loggedInUser.userId);
-      this.props.moviesUpdateActionMapper(movies);
-      this.setState({listName, userListId})
+      let userList = await getUserListBy(this.props.loggedInUser.userId);
+      if (userList === '') {
+        this.setState({hasList: false})
+      } else {
+        let { movies, listName, userListId } = userList;
+        if (this.props.movies !== movies) {
+          console.log("Not equal")
+          console.log(movies);
+          console.log(this.props.movies);
+          this.props.moviesUpdateActionMapper(movies);
+        }
+        this.setState({listName, userListId})
+      }
     }
     catch(e)
     {
-      throw(e.message);
+      console.log(e.message);
+      throw(e);
     }
     try 
     {
@@ -77,11 +91,10 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
   }
   
   removeMovieFromList = async (e: any) => {
-    console.log("am i here?")
-    let movieId = parseInt(e.currentTarget.value);
     let numberMoviesDeleted = 0;
-    console.log(this.state)
     // Remove the movie from the list
+    let movieId = e.currentTarget.value;
+    if (movieId == 0) return;
     try 
     {
       numberMoviesDeleted = await deleteMovieFromUserList(movieId, this.state.userListId);
@@ -113,44 +126,90 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
     console.log("after the timeout");
   }
 
+  createList = async (e: any) => {
+    e.preventDefault();
+    let { userId, username } = this.props.loggedInUser;
+    let listName = this.state.listName;
+    if (listName.length === 0) return;
+    let res = await createUserList(userId, listName, username);
+    console.log(res);
+    if (res) {
+      let userList = await getUserListBy(this.props.loggedInUser.userId);
+      let { movies, listName, userListId } = userList;
+      this.props.moviesUpdateActionMapper(movies);
+      this.setState({listName, userListId, hasList: true})
+    }
+  }
+
+  setInputStates = (change: any) => {
+    let { name, value } = change.currentTarget;
+    this.setState({[name]: value})
+  }
+
+  clearError = () => {
+    this.setState({
+      isError: false,
+      errorMessage: '',
+    })
+  }
+
 
 
   render() {
     const movies = this.props.movies;
     return (
       <div className="page" id="moviesListFormPage">
-        <Jumbotron>
-          {/* This will take some work to make it a dynamic title so come back later if you have time */}
-          <h1 className="display-3 center">{`Your Movie List:`}</h1>
-          <h1 className="display-3 center">{`${this.state.listName}`}</h1>
-        </Jumbotron>
-        <AddMovieComponentReduxContainer loggedInUser={this.props.loggedInUser}></AddMovieComponentReduxContainer>
-        <Row>
-            {movies.length === 0 ? "" : movies.map((movieObj: Movie)=>{
-                //return <img key={movieObj.movieId} src={movieObj.poster}/>
-                return (
-                  <Col 
-                    className="myColumn myPadding" 
-                    key={movieObj.movieId} 
-                    xl={6}
-                  >
-                    <MoviePreview 
-                      deleteButton={true}
-                      movie={movieObj} 
-                      onDelete={this.removeMovieFromList}
-                      onClick={()=>{this.props.history.push(`title/${movieObj.title}`)}}
-                    />
-                  </Col>
-                )
-            })}
-        </Row>
-        <DBToast
-          color="#ffcccb"
-          numberMoviesAffected={this.state.numberMoviesDeleted}
-          action="Deleted"
-          moviesLength={this.props.movies.length}
-        >
-        </DBToast>
+        {this.state.hasList ? 
+        <>
+          <Jumbotron>
+            {/* This will take some work to make it a dynamic title so come back later if you have time */}
+            <h1 className="display-3 center">{`Your Movie List:`}</h1>
+            <h1 className="display-3 center">{`${this.state.listName}`}</h1>
+          </Jumbotron>
+          <AddMovieComponentReduxContainer loggedInUser={this.props.loggedInUser}></AddMovieComponentReduxContainer>
+          <Row>
+              {movies.length === 0 ? "" : movies.map((movieObj: Movie)=>{
+                  //return <img key={movieObj.movieId} src={movieObj.poster}/>
+                  return (
+                    <Col 
+                      className="myColumn myPadding" 
+                      key={movieObj.movieId} 
+                      xl={6}
+                    >
+                      <MoviePreview 
+                        deleteButton={true}
+                        movie={movieObj} 
+                        onDelete={this.removeMovieFromList}
+                        onClick={()=>{this.props.history.push(`title/${movieObj.title}`)}}
+                      />
+                    </Col>
+                  )
+              })}
+          </Row>
+          <DBToast
+            color="#ffcccb"
+            numberMoviesAffected={this.state.numberMoviesDeleted}
+            action="Deleted"
+            moviesLength={this.props.movies.length}
+          >
+          </DBToast>
+        </>
+        :
+        <>
+          <Jumbotron>
+            {/* This will take some work to make it a dynamic title so come back later if you have time */}
+            <h1 className="display-3 center">{`Your Movie List Page`}</h1>
+            <h1 className="display-5 center">{`Name Your List and Submit Your Great Collection`}</h1>
+          </Jumbotron>
+          <Form onSubmit={this.createList}>
+            <FormGroup>
+              <Label for="listName">Your List Name:</Label>
+              <Input type="text" name="listName" id="listName" onChange={this.setInputStates} value={this.state.listName} placeholder="glorious list names only" />
+            </FormGroup>
+            <Button>THE BUTTON</Button>
+          </Form>
+        </>
+        }
       </div>
     )
   }
