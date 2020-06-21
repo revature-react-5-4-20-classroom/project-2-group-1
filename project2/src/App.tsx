@@ -81,6 +81,7 @@ export class App extends React.Component<any, any> {
           <Provider store={store}>
             <Router>
               <NavBar 
+                //onClick={()=>{this.state.history.push("/movies")}}
                 logoutUser={this.logoutUser}
                 loggedInUser = {this.state.loggedInUser}
                 toggleTheme={this.toggleTheme}

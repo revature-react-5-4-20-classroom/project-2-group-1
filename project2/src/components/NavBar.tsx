@@ -1,20 +1,56 @@
 import react from 'react';
 import reactdom from 'react-dom';
 import { Nav, NavItem, Button, Form, FormGroup, Label, Input, Navbar, DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import React from 'react';
 import { User } from '../models/Users';
+import { AnyMxRecord } from 'dns';
+
 
 
 interface INavBarProps
 {
+    //onClick:() =>void;
     logoutUser: () =>void;
     loggedInUser: User | null;
     toggleTheme: ()=> void
+
 }
 
 export class NavBar extends React.Component<INavBarProps, any>
 {
+    constructor(props: any)
+    {
+        super(props);
+        this.state=
+        {
+            title: "",
+            redirect: false
+        }
+    }
+    setRedirect=()=>{
+        this.setState({
+            redirect: true
+        })
+    }
+    renderRedirect=(title: string)=>
+    {
+        if(this.state.redirect)
+        {
+            this.setState({
+                redirect: false
+            })
+            return <Redirect push to={`movies/title/${title}`}/>
+        
+        }
+    }
+
+
+    bindInputChangeTostate = (submitEvent: any) =>
+    {
+        //@ts-ignore
+        this.setState({[submitEvent.currentTarget.name]: submitEvent.currentTarget.value})
+    }
     render(){
         return(
         <div>
@@ -36,8 +72,8 @@ export class NavBar extends React.Component<INavBarProps, any>
                     <NavItem tag={()=>{return <Button to="/home"  hidden={!this.props.loggedInUser} onClick={this.props.logoutUser} color="secondary" outline>Logout</Button>}} />
                     <button onClick={()=>this.props.toggleTheme()}>Toggle Theme</button>
                 </Nav>
-                <Form inline className="mr-sm-2">
-                    <UncontrolledDropdown>
+                <Form inline className="mr-sm-2"  >
+                    {/* <UncontrolledDropdown>
                          <DropdownToggle >
                             Search Options
                         </DropdownToggle>
@@ -55,13 +91,16 @@ export class NavBar extends React.Component<INavBarProps, any>
                             Directors
                             </DropdownItem>
                         </DropdownMenu>
-                    </UncontrolledDropdown>
-                    <FormGroup >
-                        <Input
-                            type="search"
-                            placeholder="Search"
+                    </UncontrolledDropdown> */}
+                    <FormGroup>
+                        <Input 
+                            onChange={this.bindInputChangeTostate}
+                            name="title"
+                            type="text"
+                            value={this.state.title}
                         />
-                        <Button variant="outline-success">Search</Button>
+                        <Button onClick={this.setRedirect}>Blah blah</Button>
+                        {this.renderRedirect(this.state.title)}
                     </FormGroup>
                 </Form>
             </Navbar>
