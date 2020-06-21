@@ -199,3 +199,16 @@ export async function deleteUserList(userListId: number): Promise<number>
         throw e;
     }
 }
+
+export async function patchUserListName(listName: string, userListId: number): Promise<any>
+{
+    let userList = new UserList(userListId, listName, {userId: 0, username: "notused"}, [])
+    try {
+        const response = await movieClient.patch(`/userlists/userlistid/${userListId}`, userList)
+        console.log("after the backend has been queryed");
+        return response.data;
+    } catch (e) {
+        console.log(e.message);
+        throw e;
+    }
+}

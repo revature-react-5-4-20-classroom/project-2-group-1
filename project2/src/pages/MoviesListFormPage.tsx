@@ -1,7 +1,7 @@
 import React from 'react';
 import { Movie } from '../models/Movie';
 import { User } from '../models/Users';
-import { Form, FormGroup, Label, Col, Input, Button, Toast, ToastHeader, ToastBody, Jumbotron, Row } from 'reactstrap';
+import { Form, FormGroup, Label, Col, Input, Button, Toast, ToastHeader, ToastBody, Jumbotron, Row, Container, Tooltip } from 'reactstrap';
 import { getUserListBy, deleteMovieFromUserList, addMovieToUserList, getAllMovies, createUserList, deleteUserList } from '../api/movieClient';
 import { MoviePreview } from '../components/moviePreview';
 import { DBToast } from '../components/DBToast';
@@ -10,6 +10,7 @@ import { AddMovieComponent } from '../components/AddMovieComponent';
 import { IState } from '../redux/reducers';
 import { moviesUpdateActionMapper, userListsActionMapper } from "../redux/action-mappers";
 import { connect } from 'react-redux';
+import { ChangeListNameComponent } from '../components/ChangeListNameComponent';
 
 //! For Redux
 const mapStateToPropsUserLists = (state: IState) => {
@@ -41,6 +42,8 @@ interface IMoviesListFormPageState {
   numberMoviesDeleted: number;
   numberMoviesAdded: number;
   hasList: boolean;
+  changeListName: boolean;
+  tooltipOpen: boolean;
 }
 
 export class MoviesListFormPage extends React.Component <IMoviesListFormPageProps, IMoviesListFormPageState> {
@@ -53,10 +56,16 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
       numberMoviesAdded: 0,
       numberMoviesDeleted: 0,
       hasList: true,
+      changeListName: false,
+      tooltipOpen: false,
     }
   }
 
   async componentDidMount() {
+    if (this.props.loggedInUser === null) {
+      this.props.history.push("/login");
+      return;
+    }
     try 
     {
       let userList = await getUserListBy(this.props.loggedInUser.userId);
@@ -160,6 +169,16 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
     })
   }
 
+  updateListName = (listName: string) => {
+    this.setState({changeListName: false, listName});
+  }
+
+  changeListName = () => {
+    this.setState({changeListName: true})
+  }
+
+  toggle = () => this.setState({tooltipOpen: !this.state.tooltipOpen});
+
 
 
   render() {
@@ -170,9 +189,21 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
         <>
           <Jumbotron>
             {/* This will take some work to make it a dynamic title so come back later if you have time */}
-            <h1 className="display-3 center">{`Your Movie List:`}</h1>
-            <h1 className="display-3 center">{`${this.state.listName}`}</h1>
+            <Container fluid>
+              <h1 className="display-3 center">{`Your Movie List:`}</h1>
+              <h1 className="display-3 center" id="userListMovieH1" onClick={this.changeListName}>
+                <span style={{textDecoration: "underline"}} id="TooltipExample">{`${this.state.listName}`}</span>
+              </h1>
+              <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="TooltipExample" toggle={this.toggle}>
+                Click To Rename Your List
+              </Tooltip>
+
+            </Container>
           </Jumbotron>
+          {this.state.changeListName ? 
+            <ChangeListNameComponent updateListName={this.updateListName} listName={this.state.listName} userListId={this.state.userListId}></ChangeListNameComponent>
+            : ""
+          }
           <AddMovieComponentReduxContainer loggedInUser={this.props.loggedInUser}></AddMovieComponentReduxContainer>
           <Row>
               {movies.length === 0 ? "" : movies.map((movieObj: Movie)=>{
@@ -214,7 +245,7 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
               <Label for="listName">Your List Name:</Label>
               <Input type="text" name="listName" id="listName" onChange={this.setInputStates} value={this.state.listName} placeholder="glorious list names only" />
             </FormGroup>
-            <Button>THE BUTTON</Button>
+            <Button color="success">THE BUTTON</Button>
           </Form>
         </>
         }

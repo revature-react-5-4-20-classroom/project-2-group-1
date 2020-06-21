@@ -1,6 +1,6 @@
 import React from 'react';
 import { getAllUserLists, getUserListByListId, getAllMovies, addMovieToUserList, getUserListBy } from '../api/movieClient';
-import { Button } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Movie } from '../models/Movie';
 import { User } from '../models/Users';
 
@@ -100,7 +100,7 @@ export class AddMovieComponent extends React.Component<IAddMovieComponentProps, 
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
+        {/* <form onSubmit={this.handleSubmit} style={{marginLeft: "10px"}}>
           <label>
           {`Available Movies: `}
           <select name="listId" value={this.state.value} onChange={this.handleChange}>
@@ -115,7 +115,23 @@ export class AddMovieComponent extends React.Component<IAddMovieComponentProps, 
           </select>
           </label>
           <input type="submit"/>
-        </form>
+        </form> */}
+        <Form onSubmit={this.handleSubmit}>
+            <FormGroup>
+              <Label for="listId">Available Movies:</Label>
+              <Input type="select" name="listId" id="listId" onChange={this.handleChange} value={this.state.value}> 
+                <option value={0}>Select A Movie To Add</option>
+                  {this.state.allMovies.map((movie: Movie) => 
+                  <option 
+                  key={movie.movieId}
+                  value={movie.movieId}
+                  >
+                    {movie.title}
+                </option>)}
+              </Input>
+            </FormGroup>
+            <Button color="success">Add Movie</Button>
+          </Form>
       </>
     )
   }
