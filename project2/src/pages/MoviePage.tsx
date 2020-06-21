@@ -3,6 +3,7 @@ import { getMovieByTitle, getAllMovies } from '../api/movieClient';
 import { Container, Row, Table, Col } from 'reactstrap';
 import { Movie } from '../models/Movie';
 import { MoviePreview } from '../components/moviePreview';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -23,8 +24,13 @@ export class MoviePage extends React.Component<any, any> {
     {
       var search = this.props.match.params.title.toLowerCase()
       this.setState({
-        movies: await getMovieByTitle("casablanca")
+        movies: await getMovieByTitle(search)
       })
+      if(this.state.movies)
+      {
+        console.log("inside the if")
+        return <Redirect to="/home"/>
+      }
     }
     catch(e)
     {
@@ -35,8 +41,8 @@ export class MoviePage extends React.Component<any, any> {
     return (
       <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', }} className="page" id="moviePage">
         <Container  sm={{size: 12}}>
-          <Row>
-            <Col md={{ size: 6, offset: 3 }}>
+          <Row className="justify-content-center">
+            <Col md={{ size: 6, offset: 2 }}>
             <h1>{this.state.movies.title}</h1><br />
             </Col>
           </Row>
