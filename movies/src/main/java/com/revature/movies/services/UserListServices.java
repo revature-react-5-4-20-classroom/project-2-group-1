@@ -41,7 +41,6 @@ public class UserListServices implements UserListServicesInterface {
   @Override
   public UserList addUserList(UserList userList, Integer userId) {
     userList.setUserListId(0);
-    System.out.println(userList.getUserListId());
     return userListRepository.save(userList);
   }
 
