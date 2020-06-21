@@ -193,3 +193,16 @@ export async function createUserList(userId: number, listName: string, username:
         throw e;
     }
 }
+
+export async function deleteUserList(userListId: number): Promise<number>
+{
+    try {
+        const response = await movieClient.delete(`/userlists/userlistid/${userListId}`)
+        console.log("After the backend has been queryed");
+        // Number of lists deleted
+        return response.data;
+    } catch (e) {
+        console.log(e.message);
+        throw e;
+    }
+}

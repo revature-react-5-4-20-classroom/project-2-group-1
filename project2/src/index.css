@@ -24,3 +24,10 @@ img.ourPoster {
   margin-right: auto;
   width: 90%;
 }
+
+#deleteListBtn {
+  display: block;
+  margin: 50px auto 5px auto;
+  min-width: 250px;
+  border: 2px solid black;
+}
