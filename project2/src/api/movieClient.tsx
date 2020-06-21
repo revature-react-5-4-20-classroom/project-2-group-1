@@ -8,7 +8,7 @@ import { UserList } from '../models/UserList';
 // Testing: "http://localhost:8081/"
 
 const movieClient = axios.create({
-    baseURL: "http://localhost:8081/", 
+    baseURL: "http://ec2-18-223-3-0.us-east-2.compute.amazonaws.com:7773/", 
     withCredentials: true, 
 })
 
