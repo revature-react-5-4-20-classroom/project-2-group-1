@@ -25,7 +25,7 @@ export class MoviePreview extends React.Component<IMoviePreivewProps>
     {
         return(
             <>
-                <Row onClick={this.props.onClick}>
+                <Row>
                     <Col className="myColumn moviePadding">
                     <h1>{this.props.movie.title}</h1>
                     <h2>Director: {this.props.movie.director}</h2>
@@ -34,7 +34,9 @@ export class MoviePreview extends React.Component<IMoviePreivewProps>
                     <h2>Plot: {this.props.movie.plot}</h2>
                     </Col>
                     <Col>
-                    <img src={this.props.movie.poster} />
+                    <div className="ourPoster posterWrapper">
+                        <img src={this.props.movie.poster}  onClick={this.props.onClick} className="ourPoster"/>
+                    </div>
                     </Col>
                 </Row>
                 {this.props.deleteButton ? 
