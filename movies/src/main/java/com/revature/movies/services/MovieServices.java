@@ -36,7 +36,7 @@ public class MovieServices implements MovieServicesInterface  {
 	  return movieRepositoryInterface.findAll();
   }
  
-  public void addNewActors(List<Actor> actors) {
+  /*public void addNewActors(List<Actor> actors) {
 	  System.out.println(actors.toString());
 	  movieRepositoryClass.addNewActors(actors);
   }
@@ -44,8 +44,12 @@ public class MovieServices implements MovieServicesInterface  {
   public void addNewGenres(List<Genre> genres) {
 	  System.out.println(genres.toString());
 	  movieRepositoryClass.addNewGenres(genres);
-  }
+  }*/
   
+  public void addNewDirector(Director director) {
+	  System.out.println(director.toString());
+	  movieRepositoryClass.addNewDirector(director);
+  }
   
   /*public void addNewMovie(int movieId, String imdbId, String title, String rated, String released, String runtime, Director director, List<Actor> actors, List<Genre> genres, String plot, String poster, int imdbRating, double metascore, String trailer) { 
   
