@@ -12,3 +12,15 @@
 .centerElement.myButton {
   margin: 5px auto;
 }
+
+.ourPoster.posterWrapper:hover {
+  cursor: pointer;
+  background-color: gold;
+}
+
+img.ourPoster {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
