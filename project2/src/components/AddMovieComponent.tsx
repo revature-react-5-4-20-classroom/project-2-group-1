@@ -33,7 +33,9 @@ export class AddMovieComponent extends React.Component<IAddMovieComponentProps, 
       let allMovies = await getAllMovies();
       this.setState({allMovies});
       // I need to set the global movies to the current users list
-      let { movies, userListId } = await getUserListByListId(this.props.loggedInUser.userId);
+      let { movies, userListId } = await getUserListBy(this.props.loggedInUser.userId);
+      console.log("this is what movies looks like here in addmoviecomponent")
+      console.log(movies);
       this.props.moviesUpdateActionMapper(movies);
       this.setState({userListId})
       // Then I need all of those ids
