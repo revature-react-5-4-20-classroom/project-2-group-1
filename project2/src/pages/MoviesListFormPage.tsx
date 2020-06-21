@@ -2,7 +2,7 @@ import React from 'react';
 import { Movie } from '../models/Movie';
 import { User } from '../models/Users';
 import { Form, FormGroup, Label, Col, Input, Button, Toast, ToastHeader, ToastBody, Jumbotron, Row } from 'reactstrap';
-import { getUserListBy, deleteMovieFromUserList, addMovieToUserList, getAllMovies, createUserList } from '../api/movieClient';
+import { getUserListBy, deleteMovieFromUserList, addMovieToUserList, getAllMovies, createUserList, deleteUserList } from '../api/movieClient';
 import { MoviePreview } from '../components/moviePreview';
 import { DBToast } from '../components/DBToast';
 import { UserListsComponent } from '../components/UserListsComponent';
@@ -141,6 +141,13 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
     }
   }
 
+  deleteList = async (e: any) => {
+    let numberDeleted = await deleteUserList(this.state.userListId);
+    if (numberDeleted !== 0) {
+      this.setState({listName: '', userListId: 0, hasList: false})
+    }
+  }
+
   setInputStates = (change: any) => {
     let { name, value } = change.currentTarget;
     this.setState({[name]: value})
@@ -186,6 +193,7 @@ export class MoviesListFormPage extends React.Component <IMoviesListFormPageProp
                   )
               })}
           </Row>
+          <Button color="danger" size="lg" onClick={this.deleteList} id="deleteListBtn">DELETE YOUR ENTIRE LIST</Button>
           <DBToast
             color="#ffcccb"
             numberMoviesAffected={this.state.numberMoviesDeleted}
