@@ -47,6 +47,7 @@ export class UserForm extends React.Component<any,any>
     {
         return(
             <Container>
+                <h3>Register as a new user!</h3>
                 <Form md={{ size: 8, offset: 1}} onSubmit={this.submitNewUser}>
                     <FormGroup>
                         <Label for="username">Username</Label>
