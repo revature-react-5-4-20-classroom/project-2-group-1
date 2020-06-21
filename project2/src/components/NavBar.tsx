@@ -1,7 +1,7 @@
 import react from 'react';
 import reactdom from 'react-dom';
 import { Nav, NavItem, Button, Form, FormGroup, Label, Input, Navbar, DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle } from 'reactstrap';
-import { Redirect, NavLink } from 'react-router-dom';
+import { Redirect, NavLink, Link } from 'react-router-dom';
 import React from 'react';
 import { User } from '../models/Users';
 import { AnyMxRecord } from 'dns';
@@ -14,6 +14,7 @@ interface INavBarProps
     logoutUser: () =>void;
     loggedInUser: User | null;
     toggleTheme: ()=> void
+    history: any
 
 }
 
@@ -28,7 +29,8 @@ export class NavBar extends React.Component<INavBarProps, any>
             redirect: false
         }
     }
-    setRedirect=()=>{
+    setRedirect=(event: any)=>{
+        event.preventDefault()
         this.setState({
             redirect: true
         })
@@ -40,7 +42,7 @@ export class NavBar extends React.Component<INavBarProps, any>
             this.setState({
                 redirect: false
             })
-            return <Redirect push to={`movies/title/${title}`}/>
+            return <Redirect to={`movies/title/${title}`}/>
         
         }
     }
@@ -97,12 +99,14 @@ export class NavBar extends React.Component<INavBarProps, any>
                             onChange={this.bindInputChangeTostate}
                             name="title"
                             type="text"
+                            placeholder="Search by title!"
                             value={this.state.title}
                         />
-                        <Button onClick={this.setRedirect}>Blah blah</Button>
-                        {this.renderRedirect(this.state.title)}
+                        {/* <Button>Blah blah</Button> */}
+                        <button><Link to={`/movies/title/${this.state.title}`}>Search</Link></button>
                     </FormGroup>
                 </Form>
+
             </Navbar>
         </div>
         )
