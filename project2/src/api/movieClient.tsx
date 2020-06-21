@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {Movie} from "../models/Movie"
-import {basename} from "path"
 import { objectArrayToStringArray } from '../utils';
 import { User } from '../models/Users';
 import { UserList } from '../models/UserList';
@@ -9,7 +8,7 @@ import { UserList } from '../models/UserList';
 // Testing: "http://localhost:8081/"
 
 const movieClient = axios.create({
-    baseURL: "http://localhost:8081/", 
+    baseURL: "http://ec2-18-223-3-0.us-east-2.compute.amazonaws.com:7773/", 
     withCredentials: true, 
 })
 
@@ -78,12 +77,6 @@ export async function submitUser(u: User)
 //! USER LIST STUFF
 
 
-interface IPromiseGetUserListBy {
-    movies: Movie[],
-    listName: string,
-    listOwner: any,
-    userListId: number
-}
 // Get the userList by userId
 export async function getUserListBy(userId: number): Promise<any> //Promise<Movie[]>
 {

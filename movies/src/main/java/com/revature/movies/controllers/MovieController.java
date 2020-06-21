@@ -23,7 +23,7 @@ public class MovieController {
   @Autowired 
   MovieServices movieServices; 
  
-  @GetMapping("/{title}")
+  @GetMapping("/movies/{title}")
    public Movie getMovieByTitle(@PathVariable String title) {
      try {
     	

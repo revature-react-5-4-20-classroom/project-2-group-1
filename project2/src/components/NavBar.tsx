@@ -31,7 +31,7 @@ export class NavBar extends React.Component<INavBarProps, any>
                     </NavItem>
                     {/* I don't want htis to be the perminant location of this list form but I didn't know where to put it */}
                     <NavItem>
-                        <NavLink to="/movies/list-form" className="nav-link" activeClassName="active">Your List</NavLink>
+                        <NavLink to="/movies/list-form" className="nav-link" activeClassName="active" hidden={!this.props.loggedInUser}>Your List</NavLink>
                     </NavItem>
                     <NavItem tag={()=>{return <Button to="/home"  hidden={!this.props.loggedInUser} onClick={this.props.logoutUser} color="secondary" outline>Logout</Button>}} />
                     <button onClick={()=>this.props.toggleTheme()}>Toggle Theme</button>
